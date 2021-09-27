@@ -5,7 +5,7 @@ def roll_artificer():
     stats = [
     random.randint(7,15), # strength
     random.randint(11,16), # dexterity
-    random.randint(13,17), # co nstitution
+    random.randint(13,17), # constitution
     random.randint(14,18), # intelligence
     random.randint(6,15), # wisdom
     random.randint(7,16) # charisma
@@ -16,7 +16,7 @@ def roll_barbarian():
     stats = [
     random.randint(14,18), # strength
     random.randint(12,17), # dexterity
-    random.randint(13,18), # co nstitution
+    random.randint(13,18), # constitution
     random.randint(5,15), # intelligence
     random.randint(6,16), # wisdom
     random.randint(7,17) # charisma
