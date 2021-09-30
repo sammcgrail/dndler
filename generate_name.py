@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import random
 
-# yeah this one needs to be completely redone lol
-
 # import names csv to create dict of names by race
 def import_names():
     names_df = pd.read_csv('names.csv')
