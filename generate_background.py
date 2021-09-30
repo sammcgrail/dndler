@@ -56,6 +56,22 @@ def roll_flaw(choice='any'):
         title = choice
     return random.choice(backgrounds[title]['Flaw'])
 
+# some backgrounds have unique specialties
+common = ['Trait', 'Ideal', 'Bond', 'Flaw']
+extra = []
+
+for bg in backgrounds.keys():
+    if len(backgrounds[bg].keys())>4:
+        print(bg)
+        print(backgrounds[bg].keys())
+
+for bg in backgrounds.keys():
+    for item in backgrounds[bg].keys():
+        if item not in common:
+            print(bg)
+            print(item)
+            print('')
+
 # create full background, choice optional
 def generate_background(choice='any'):
     title = ''

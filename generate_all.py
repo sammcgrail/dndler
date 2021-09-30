@@ -6,17 +6,17 @@ import generate_background
 import generate_stats
 
 # master generator
-def generate_all():
+def generate_all(race_choice='any', background_choice='any'):
     # empty character dict that gets filled in by individual generators
     char_dict = {'race':'',
                  'name':'',
                  'class':'',
                  'background':{},
                  'stats':{}}
-    char_dict['race'] = generate_race()
-    #char_dict['name'] = generate_name()
+    char_dict['race'] = generate_race(race_choice)
+    char_dict['name'] = generate_name()
     char_dict['class'] = generate_class()
-    char_dict['background'] = generate_background()
+    char_dict['background'] = generate_background(background_choice)
     char_dict['stats'] = generate_stats(char_dict['race'])
     # return filled character dict
     return char_dict

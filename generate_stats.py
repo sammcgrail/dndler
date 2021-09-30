@@ -17,7 +17,7 @@ race_bonuses = {
     'Rock Gnome': np.array([0, 0, 1, 2, 0, 0]),
     'Half-Elf': np.array([0, 0, 0, 0, 0, 2]), # two additional +1's
     'Lightfoot Halfling': np.array([0, 2, 0, 0, 0, 1]),
-    'Stout Halfling': np.array([0, 2, 1, 0, 0, 0]),
+    'Stout Halfling': np.array([0, 2, 1 , 0, 0, 0]),
     'Half-Orc': np.array([2, 0, 1, 0, 0, 0]),
     'Human': np.array([1, 1, 1, 1, 1, 1]),
     'Variant Human': np.array([0, 0, 0, 0, 0, 0]), # choose two +1's
