@@ -5,7 +5,7 @@ import numpy as np
 # abbreviated ability scores
 ability_scores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
 
-# race bonuses as np arrays
+# race bonuses as np arrays, case and spelling must match race generation
 race_bonuses = {
     'Dragonborn': np.array([0, 2, 0, 0, 0, 1]),
     'Hill Dwarf': np.array([0, 0, 2, 0, 1, 0]),
@@ -28,7 +28,7 @@ race_bonuses = {
     'Fairy': np.array([0, 0, 0, 0, 0, 0]),
     'Harengon': np.array([0, 0, 0, 0, 0, 0]),
     'Aarakocra': np.array([0, 2, 0, 0, 1, 0]),
-    'Genasi': np.array([0, 0, 2, 0, 0, 0]), # additional +1 based on element    
+    'Genasi': np.array([0, 0, 2, 0, 0, 0]), # additional +1 based on element
     'Goliath': np.array([2, 0, 1, 0, 0, 0]),
     'Aasimar': np.array([0, 0, 0, 0, 0, 2]),
     'Bugbear': np.array([2, 1, 0, 0, 0, 0]),

@@ -1,6 +1,6 @@
 import random
 
-# list of 5e races
+# (k, v) of sourcebooks, races
 races = {
     'Player\'s Handbook':
         ['Dragonborn','Hill Dwarf', 'Mountain Dwarf', 'Drow Elf', 'High Elf', 'Wood Elf',
@@ -25,7 +25,7 @@ races = {
         ['Centaur', 'Loxodon', 'Minotaur', 'Simic Hybrid', 'Vedalken']
     }
 
-# randomly select race and return
+# randomly select sourcebook, then race within it, and return
 def generate_race():
     race_source = random.choice(list(races.keys()))
     char_race = random.choice(races[race_source])

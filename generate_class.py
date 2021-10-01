@@ -1,7 +1,6 @@
 import random
 
-# list of 5e classes
-# future proofing for handling multiple sourcebooks
+# (k, v) of sourcebooks, classes
 classes = {
     'Player\'s Handbook':
         ['Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk',
@@ -10,7 +9,7 @@ classes = {
         #['Artificer']
     }
 
-# randomly select class and return
+# randomly select sourcebook, then class within it, and return
 def generate_class():
     class_source = random.choice(list(classes.keys()))
     char_class = random.choice(classes[class_source])

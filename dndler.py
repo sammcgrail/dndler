@@ -3,12 +3,12 @@ import generate_all
 
 def introduce_character(char_dict):
     print('')
-    print('Hello, ' + char_dict['name'] + '.')
+    print('Hello, ' + str(char_dict['name']) + '.')
     print('')
-    print("You are a " + character['race'] + " " + character['class'] + ".")
+    print("You are a " + str(character['race']) + " " + str(character['class']) + ".")
     print('')
     print("Your stats are: ")
-    print(character['stats']['Total Stats'])
+    print(str(character['stats']['Total Stats']))
     print('')
     print("Your Story So Far: ")
     print('')
