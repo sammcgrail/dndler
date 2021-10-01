@@ -21,8 +21,39 @@ race_bonuses = {
     'Half-Orc': np.array([2, 0, 1, 0, 0, 0]),
     'Human': np.array([1, 1, 1, 1, 1, 1]),
     'Variant Human': np.array([0, 0, 0, 0, 0, 0]), # choose two +1's
-    'Tiefling': np.array([0, 0, 0, 1, 0, 2])
-}
+    'Tiefling': np.array([0, 0, 0, 1, 0, 2]),
+    'Orc of Exandria': np.array([2, 0, 1, 0, 0, 0]),
+    'Leonin': np.array([1, 0, 2, 0, 0, 0]),
+    'Satyr': np.array([0, 1, 0, 0, 0, 2]),
+    'Fairy': np.array([0, 0, 0, 0, 0, 0]),
+    'Harengon': np.array([0, 0, 0, 0, 0, 0]),
+    'Aarakocra': np.array([0, 2, 0, 0, 1, 0]),
+    'Genasi': np.array([0, 0, 2, 0, 0, 0]),
+    'Goliath': np.array([2, 0, 1, 0, 0, 0]),
+    'Aasimar': np.array([0, 0, 0, 0, 0, 2]),
+    'Bugbear': np.array([2, 1, 0, 0, 0, 0]),
+    'Firbolg': np.array([1, 0, 0, 0, 2, 0]),
+    'Goblin': np.array([0, 2, 1, 0, 0, 0]),
+    'Hobgoblin': np.array([0, 0, 2, 1, 0, 0]),
+    'Kenku': np.array([0, 2, 0, 0, 1, 0]),
+    'Kobold': np.array([0, 2, 0, 0, 0, 0]),
+    'Lizardfolk': np.array([0, 0, 2, 0, 1, 0]),
+    'Orc': np.array([2, 0, 1, 0, 0, 0]),
+    'Tabaxi': np.array([0, 2, 0, 0, 0, 1]),
+    'Triton': np.array([1, 0, 1, 0, 0, 1]),
+    'Yuan-Ti Pureblood': np.array([0, 0, 0, 1, 0, 2]),
+    'Feral Tiefling': np.array([0, 2, 0, 1, 0, 0]),
+    'Changeling': np.array([0, 0, 0, 0, 0, 2]), # choose additional +1
+    'Kalashtar': np.array([0, 0, 0, 0, 2, 1]),
+    'Orc of Eberron': np.array([2, 0, 1, 0, 0, 0]),
+    'Shifter': np.array([0, 0, 0, 0, 0, 0]),
+    'Warforged': np.array([0, 0, 2, 0, 0, 0]), # choose additional +1
+    'Centaur': np.array([2, 0, 0, 0, 1, 0]),
+    'Loxodon': np.array([0, 0, 2, 0, 1, 0]),
+    'Minotaur': np.array([2, 0, 1, 0, 0, 0]),
+    'Simic Hybrid': np.array([0, 0, 2, 0, 0, 0]), # choose additional +1
+    'Vedalken': np.array([0, 0, 0, 2, 1, 0])
+    }
 
 # simulated dicerolls for base stats
 def roll_4_drop_lowest():
@@ -37,4 +68,4 @@ def generate_stats(race_choice):
     base_stats = [roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(),
                   roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()]
     total_stats = base_stats + race_bonuses[race_choice]
-    return dict(zip(ability_scores, total_stats))
+    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))
