@@ -62,15 +62,14 @@ def roll_4_drop_lowest():
     dicerolls = dicerolls[0:3]
     return sum(dicerolls)
 
-# finalize stats, race mandatory for calculating bonuses
+# generate stats, assigned randomly to ability scores
 def generate_unweighted_stats(race_choice):
     base_stats = [roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(),
                   roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()]
     total_stats = base_stats + race_bonuses[race_choice]
     return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))
 
-# 'Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'
-
+# generate stats, assign with priority to certain scores, assign rest randomly
 def generate_weighted_stats(race_choice, class_choice):
     base_stats = [0, 0, 0, 0, 0, 0]
     sorted_stats = sorted([roll_4_drop_lowest(), roll_4_drop_lowest(),

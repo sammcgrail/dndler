@@ -49,8 +49,15 @@ def print_char(char_dict):
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['title'])
     print('')
+    if list(char_dict['background'])[1] not in ['ideal', 'trait', 'bond', 'flaw']:
+        extra = list(char_dict['background'])[1]
+        desc = char_dict['background'][extra]
+        print(extra + ': ' + desc)
     print('Ideal: ' + '\"' + char_dict['background']['ideal'] + '\"')
     print('Trait: ' + '\"' + char_dict['background']['trait'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['flaw'] + '\"')
     print('')
+    print('Sourcebooks: ')
+    print('Class: ' + char_dict['sources']['Class'])
+    print('Race: ' + char_dict['sources']['Race'])
