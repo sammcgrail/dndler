@@ -28,7 +28,7 @@ race_bonuses = {
     'Fairy': np.array([0, 0, 0, 0, 0, 0]),
     'Harengon': np.array([0, 0, 0, 0, 0, 0]),
     'Aarakocra': np.array([0, 2, 0, 0, 1, 0]),
-    'Genasi': np.array([0, 0, 2, 0, 0, 0]),
+    'Genasi': np.array([0, 0, 2, 0, 0, 0]), # additional +1 based on element    
     'Goliath': np.array([2, 0, 1, 0, 0, 0]),
     'Aasimar': np.array([0, 0, 0, 0, 0, 2]),
     'Bugbear': np.array([2, 1, 0, 0, 0, 0]),

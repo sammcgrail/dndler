@@ -21,40 +21,8 @@ backgrounds = import_backgrounds()
 titles = list(backgrounds.keys())
 
 # pick a trait, choice of background optional
-def roll_trait(choice='any'):
-    title = ''
-    if choice == 'any':
-        title = random.choice(titles)
-    else:
-        title = choice
-    return random.choice(backgrounds[title]['Trait'])
 
-# pick an ideal, choice of background optional
-def roll_ideal(choice='any'):
-    title = ''
-    if choice == 'any':
-        title = random.choice(titles)
-    else:
-        title = choice
-    return random.choice(backgrounds[title]['Ideal'])
 
-# pick a bond, choice of background optional
-def roll_bond(choice='any'):
-    title = ''
-    if choice == 'any':
-        title = random.choice(titles)
-    else:
-        title = choice
-    return random.choice(backgrounds[title]['Bond'])
-
-# pick a flaw, choice of background optional
-def roll_flaw(choice='any'):
-    title = ''
-    if choice == 'any':
-        title = random.choice(titles)
-    else:
-        title = choice
-    return random.choice(backgrounds[title]['Flaw'])
 
 # some backgrounds have unique specialties
 common = ['Trait', 'Ideal', 'Bond', 'Flaw']
