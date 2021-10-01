@@ -8,7 +8,7 @@ import generate_stats
 import os
 
 # master generator
-def generate_all(background_choice='any'):
+def generate_all(background_choice='any', weighted=False):
     # empty character dict that gets filled in by individual generators
     char_dict = {'race':'',
                  'name':'',
@@ -28,7 +28,10 @@ def generate_all(background_choice='any'):
     char_dict['name'] = generate_name()
     char_dict['class'], class_source = generate_class()
     char_dict['background'] = generate_background(background_choice)
-    base_stats, race_bonuses, total_stats = generate_stats(char_dict['race'])
+    if weighted==False:
+        base_stats, race_bonuses, total_stats = generate_unweighted_stats(char_dict['race'])
+    elif weighted==True:
+        base_stats, race_bonuses, total_stats = generate_weighted_stats(char_dict['race'], char_dict['class'])
     char_dict['stats'] = {'Base Stats':base_stats, 'Race Bonuses':race_bonuses, 'Total Stats':total_stats}
     char_dict['sources'] = {'Class':class_source, 'Race':race_source}
     # return filled character dict

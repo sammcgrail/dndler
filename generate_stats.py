@@ -63,9 +63,84 @@ def roll_4_drop_lowest():
     return sum(dicerolls)
 
 # finalize stats, race mandatory for calculating bonuses
-def generate_stats(race_choice):
-    race = race_choice
+def generate_unweighted_stats(race_choice):
     base_stats = [roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(),
                   roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()]
+    total_stats = base_stats + race_bonuses[race_choice]
+    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))
+
+# 'Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'
+
+def generate_weighted_stats(race_choice, class_choice):
+    base_stats = [0, 0, 0, 0, 0, 0]
+    sorted_stats = sorted([roll_4_drop_lowest(), roll_4_drop_lowest(),
+                           roll_4_drop_lowest(), roll_4_drop_lowest(),
+                           roll_4_drop_lowest(), roll_4_drop_lowest()], reverse=True)
+    if class_choice == 'Artificer':
+        base_stats[3] = sorted_stats.pop(0)
+        base_stats[1] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[2], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Barbarian':
+        base_stats[0] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        base_stats[1] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[3], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Bard':
+        base_stats[5] = sorted_stats.pop(0)
+        base_stats[1] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[2], base_stats[3], base_stats[4] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Cleric':
+        base_stats[4] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[1], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Druid':
+        base_stats[4] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[1], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Fighter':
+        base_stats[0] = sorted_stats.pop(0)
+        base_stats[1] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[3], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Monk':
+        base_stats[1] = sorted_stats.pop(0)
+        base_stats[4] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Paladin':
+        base_stats[0] = sorted_stats.pop(0)
+        base_stats[4] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[1], base_stats[2], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Ranger':
+        base_stats[1] = sorted_stats.pop(0)
+        base_stats[4] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[2], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Rogue':
+        base_stats[1] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[2], base_stats[3], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Sorcerer':
+        base_stats[5] = sorted_stats.pop(0)
+        base_stats[2] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[1], base_stats[3], base_stats[4] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Warlock':
+        base_stats[5] = sorted_stats.pop(0)
+        base_stats[1] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[2], base_stats[3], base_stats[4] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+    elif class_choice == 'Wizard':
+        base_stats[3] = sorted_stats.pop(0)
+        random.shuffle(sorted_stats)
+        base_stats[0], base_stats[1], base_stats[2], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
     total_stats = base_stats + race_bonuses[race_choice]
     return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))

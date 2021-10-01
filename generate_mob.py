@@ -18,7 +18,7 @@ def generate_mob(num, background):
     all_chars = []
     x = 0
     while x < num:
-        all_chars.append(generate_all(mob_list[x]))
+        all_chars.append(generate_all(mob_list[x], True))
         x+=1
     return all_chars
 
