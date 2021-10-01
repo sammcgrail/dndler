@@ -42,6 +42,12 @@ def print_char(char_dict):
 def print_mob(full_mob):
     os.system('cls')
     print('============================================================================')
-    for each in fullmob:
+    for each in full_mob:
         print_char(each)
         print('---------------------------------------------------------------------------')
+
+
+# common mobs:
+pirate_mob = generate_mob(10, ['Sailor', 'Pirate', 'Criminal'])
+military_mob = generate_mob(10, ['Soldier', 'Knight', 'Noble'])
+streetrat_mob = generate_mob(10, ['Urchin', 'Charlatan', 'Spy'])
