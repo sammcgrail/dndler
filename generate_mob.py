@@ -46,6 +46,7 @@ def print_char(char_dict):
     print('Class: ' + char_dict['sources']['Class'])
     print('Race: ' + char_dict['sources']['Race'])
 
+
 def print_mob(full_mob):
     os.system('cls')
     print('============================================================================')
@@ -58,3 +59,5 @@ def print_mob(full_mob):
 pirate_mob = generate_mob(12, ['Sailor', 'Pirate', 'Criminal'])
 military_mob = generate_mob(12, ['Soldier', 'Knight', 'Noble'])
 streetrat_mob = generate_mob(12, ['Urchin', 'Charlatan', 'Spy'])
+wise_mob = generate_mob(8, ['Acolyte', 'Sage', 'Hermit'])
+merchantfolk = generate_mob(10, ['Guild Artisan', 'Guild Merchant', 'Entertainer'])
