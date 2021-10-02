@@ -2,7 +2,7 @@ import random
 
 # armor types by weight class
 armor = {
-'Light':['Padded', 'Leather', 'Studded leather'],
+'Light':['Padded', 'Leather', 'Studded Leather'],
 'Medium':['Hide', 'Chain shirt', 'Scale Mail', 'Spiked Armor', 'Breastplate', 'Halfplate'],
 'Heavy':['Ring Mail', 'Chain Mail', 'Splint', 'Plate']
 }

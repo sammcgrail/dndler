@@ -4,6 +4,7 @@ import generate_name
 import generate_class
 import generate_background
 import generate_stats
+import generate_equipment
 
 import os
 
@@ -15,6 +16,7 @@ def generate_all(background_choice='any', weighted=False):
                  'class':'',
                  'background':{},
                  'stats':{},
+                 'equipment':[],
                  'sources':{}}
     # other initializations
     class_source = ''
@@ -28,6 +30,7 @@ def generate_all(background_choice='any', weighted=False):
     char_dict['name'] = generate_name()
     char_dict['class'], class_source = generate_class()
     char_dict['background'], background_source = generate_background(background_choice)
+    char_dict['equipment'] = generate_equipment(char_dict['class'], char_dict['background']['Title'])
     if weighted==False:
         base_stats, race_bonuses, total_stats = generate_unweighted_stats(char_dict['race'])
     elif weighted==True:
@@ -56,6 +59,10 @@ def print_char(char_dict):
     print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
+    print('')
+    print('Your Gear Contains:')
+    for item in char_dict['equipment']:
+        print(item)
     print('')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])
