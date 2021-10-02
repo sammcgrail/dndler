@@ -41,6 +41,7 @@ def generate_all(background_choice='any', weighted=False):
     return char_dict
 
 def print_char(char_dict):
+    os.system('cls')
     print('')
     print('Hello, ' + str(char_dict['name']) + '.')
     print('')
