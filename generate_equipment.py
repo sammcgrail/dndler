@@ -1,4 +1,5 @@
 import random
+import pandas as pd
 from collections.abc import Iterable
 
 # armor types by weight class

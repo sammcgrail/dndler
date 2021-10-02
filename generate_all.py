@@ -1,11 +1,10 @@
 # import other generators
-import generate_race
-import generate_name
-import generate_class
-import generate_background
-import generate_stats
-import generate_equipment
-
+from generate_race import *
+from generate_name import *
+from generate_class import *
+from generate_background import *
+from generate_stats import *
+from generate_equipment import *
 import os
 
 # master generator
@@ -42,6 +41,10 @@ def generate_all(background_choice='any', weighted=False):
 
 def print_char(char_dict):
     os.system('cls')
+    print('========================')
+    print('|         THE          |')
+    print('|        DNDLER        |')
+    print('========================')
     print('')
     print('Hello, ' + str(char_dict['name']) + '.')
     print('')
@@ -69,3 +72,4 @@ def print_char(char_dict):
     print('Race: ' + char_dict['sources']['Race'])
     print('Class: ' + char_dict['sources']['Class'])
     print('Background: ' + char_dict['sources']['Background'])
+    print('')
