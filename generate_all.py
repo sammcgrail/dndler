@@ -5,7 +5,10 @@ from generate_class import *
 from generate_background import *
 from generate_stats import *
 from generate_equipment import *
+import pandas as pd
+import datetime
 import os
+
 
 # master generator
 def generate_all(background_choice='any', weighted=False):
@@ -38,6 +41,35 @@ def generate_all(background_choice='any', weighted=False):
     char_dict['sources'] = {'Race':race_source, 'Class':class_source, 'Background':background_source}
     # return filled character dict
     return char_dict
+
+
+char_cols = ['Name', 'Race', 'Class', 'Background', 'Specialty', 'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
+
+def save_char(char_dict):
+    new_row = [char_dict['name'],
+               char_dict['race'],
+               char_dict['class'],
+               char_dict['background']['Title'],
+               char_dict['background'][list(char_dict['background'].keys())[1]],
+               char_dict['background']['Trait'],
+               char_dict['background']['Ideal'],
+               char_dict['background']['Bond'],
+               char_dict['background']['Flaw'],
+               list(char_dict['stats']['Base Stats'].values()),
+               list(char_dict['stats']['Total Stats'].values()),
+               char_dict['equipment'],
+               char_dict['sources']['Race'],
+               char_dict['sources']['Class'],
+               char_dict['sources']['Background']
+               ]
+    return new_row
+
+def export_chars(all_chars):
+    dt = datetime.datetime.now()
+    dt_str = dt.strftime("%b.%d.%y_%H.%M.%S")
+    df = pd.DataFrame(all_chars)
+    df.columns = char_cols
+    df.to_csv('all_chars/all_chars_'+dt_str+'.csv', index=False)
 
 def print_char(char_dict):
     os.system('cls')
