@@ -5,16 +5,16 @@ import generate_all
 # 'Guild Artisan', 'Guild Merchant', 'Hermit', 'Knight', 'Noble', 'Outlander',
 # 'Pirate', 'Sage', 'Sailor', 'Soldier', 'Spy', 'Urchin'
 
-def randomize_mob_list(num, background):
+def randomize_mob_list(num, bg_list):
     x = 0
     mob_list = []
     while x < num:
-        mob_list.append(random.choice(background))
+        mob_list.append(random.choice(bg_list))
         x+=1
     return mob_list
 
-def generate_mob(num, background):
-    mob_list = randomize_mob_list(num, background)
+def generate_mob(num, bg_list):
+    mob_list = randomize_mob_list(num, bg_list)
     all_chars = []
     x = 0
     while x < num:
@@ -31,20 +31,21 @@ def print_char(char_dict):
     print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
     print('')
     print('Your Story So Far:')
-    print('Your Background is as a(n) ' + char_dict['background']['title'])
+    print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
-    if list(char_dict['background'])[1] not in ['ideal', 'trait', 'bond', 'flaw']:
+    if list(char_dict['background'])[1] != '':
         extra = list(char_dict['background'])[1]
         desc = char_dict['background'][extra]
         print(extra + ': ' + desc)
-    print('Ideal: ' + '\"' + char_dict['background']['ideal'] + '\"')
-    print('Trait: ' + '\"' + char_dict['background']['trait'] + '\"')
-    print('Bond: ' + '\"' + char_dict['background']['bond'] + '\"')
-    print('Flaw: ' + '\"' + char_dict['background']['flaw'] + '\"')
+    print('Trait: ' + '\"' + char_dict['background']['Trait'] + '\"')
+    print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
+    print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
+    print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
     print('')
     print('Sourcebooks: ')
-    print('Class: ' + char_dict['sources']['Class'])
     print('Race: ' + char_dict['sources']['Race'])
+    print('Class: ' + char_dict['sources']['Class'])
+    print('Background: ' + char_dict['sources']['Background'])
 
 
 def print_mob(full_mob):

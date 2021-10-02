@@ -19,21 +19,21 @@ def generate_all(background_choice='any', weighted=False):
     # other initializations
     class_source = ''
     race_source = ''
-    # background_source = ''
-    base_stats = {},
-    race_bonuses = {},
-    total_stats = {},
+    background_source = ''
+    base_stats = {}
+    race_bonuses = {}
+    total_stats = {}
     # assignments begin here
     char_dict['race'], race_source = generate_race()
     char_dict['name'] = generate_name()
     char_dict['class'], class_source = generate_class()
-    char_dict['background'] = generate_background(background_choice)
+    char_dict['background'], background_source = generate_background(background_choice)
     if weighted==False:
         base_stats, race_bonuses, total_stats = generate_unweighted_stats(char_dict['race'])
     elif weighted==True:
         base_stats, race_bonuses, total_stats = generate_weighted_stats(char_dict['race'], char_dict['class'])
     char_dict['stats'] = {'Base Stats':base_stats, 'Race Bonuses':race_bonuses, 'Total Stats':total_stats}
-    char_dict['sources'] = {'Class':class_source, 'Race':race_source}
+    char_dict['sources'] = {'Race':race_source, 'Class':class_source, 'Background':background_source}
     # return filled character dict
     return char_dict
 
@@ -47,17 +47,18 @@ def print_char(char_dict):
     print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
     print('')
     print('Your Story So Far:')
-    print('Your Background is as a(n) ' + char_dict['background']['title'])
+    print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
-    if list(char_dict['background'])[1] not in ['ideal', 'trait', 'bond', 'flaw']:
+    if list(char_dict['background'])[1] != '':
         extra = list(char_dict['background'])[1]
         desc = char_dict['background'][extra]
         print(extra + ': ' + desc)
-    print('Ideal: ' + '\"' + char_dict['background']['ideal'] + '\"')
-    print('Trait: ' + '\"' + char_dict['background']['trait'] + '\"')
-    print('Bond: ' + '\"' + char_dict['background']['bond'] + '\"')
-    print('Flaw: ' + '\"' + char_dict['background']['flaw'] + '\"')
+    print('Trait: ' + '\"' + char_dict['background']['Trait'] + '\"')
+    print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
+    print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
+    print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
     print('')
     print('Sourcebooks: ')
-    print('Class: ' + char_dict['sources']['Class'])
     print('Race: ' + char_dict['sources']['Race'])
+    print('Class: ' + char_dict['sources']['Class'])
+    print('Background: ' + char_dict['sources']['Background'])
