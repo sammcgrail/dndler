@@ -92,7 +92,7 @@ def print_char(char_dict):
         desc = char_dict['background'][extra]
         print(extra + ': ' + desc)
     print('Trait: ' + '\"' + char_dict['background']['Trait'] + '\"')
-    print('Ideal: ' + char_dict['background']['Ideal'].split('.')[0] + ' - \"' + char_dict['background']['Ideal'].split('.')[1].strip() + '.\"' + char_dict['background']['Ideal'].split('.')[2])
+    print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
     print('')
