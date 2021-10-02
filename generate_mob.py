@@ -1,10 +1,10 @@
 import random
 import generate_all
 
-# 'Acolyte', 'Charlatan', 'Criminal', 'Entertainer', 'Folk Hero', 'Gladiator',
-# 'Guild Artisan', 'Guild Merchant', 'Hermit', 'Knight', 'Noble', 'Outlander',
-# 'Pirate', 'Sage', 'Sailor', 'Soldier', 'Spy', 'Urchin'
+# unique background titles
+titles = bg_df['Background'].unique()
 
+# create list of length num containing random assortment from bg_list
 def randomize_mob_list(num, bg_list):
     x = 0
     mob_list = []
@@ -13,6 +13,8 @@ def randomize_mob_list(num, bg_list):
         x+=1
     return mob_list
 
+
+# run character generation for each entry in bg_list, save to all_chars
 def generate_mob(num, bg_list):
     mob_list = randomize_mob_list(num, bg_list)
     all_chars = []
@@ -21,6 +23,14 @@ def generate_mob(num, bg_list):
         all_chars.append(generate_all(mob_list[x], True))
         x+=1
     return all_chars
+
+
+# pick random mob size from 5 to 15, all titles potentially selected
+def generate_random_mob():
+    num = random.randint(5, 15)
+    randmob = generate_mob(num, titles)
+    return randmob
+
 
 def print_char(char_dict):
     print('')
@@ -47,13 +57,14 @@ def print_char(char_dict):
     print('Class: ' + char_dict['sources']['Class'])
     print('Background: ' + char_dict['sources']['Background'])
 
-
+# print each entry in all_chars
 def print_mob(full_mob):
     os.system('cls')
     print('============================================================================')
     for each in full_mob:
         print_char(each)
-        print('---------------------------------------------------------------------------')
+        print('============================================================================')
+
 
 
 # common mobs:

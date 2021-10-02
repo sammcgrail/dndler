@@ -82,19 +82,3 @@ def generate_background(choice='any'):
     'Flaw':roll_flaw(title),
     }
     return background_full, source
-
-
-# create full background, choice optional
-def generate_random_background():
-    title = random.choice(titles)
-    extra, desc = identify_extras(title)
-    source = bg_df[bg_df['Background']==title]['Source'].unique()[0]
-    background_full = {
-    'Title':title,
-    extra:desc,
-    'Trait':roll_trait('any'),
-    'Ideal':roll_ideal('any'),
-    'Bond':roll_bond('any'),
-    'Flaw':roll_flaw('any'),
-    }
-    return background_full, source
