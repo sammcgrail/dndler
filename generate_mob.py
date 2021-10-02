@@ -1,5 +1,6 @@
+from generate_all import *
 import random
-import generate_all
+import os
 
 # unique background titles
 titles = bg_df['Background'].unique()
@@ -51,6 +52,10 @@ def print_char(char_dict):
     print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
+    print('')
+    print('Your Gear Contains:')
+    for item in char_dict['equipment']:
+        print(item)
     print('')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])

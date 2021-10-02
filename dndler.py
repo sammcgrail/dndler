@@ -12,7 +12,7 @@ while (d_to_dndl != 'd'):
     d_to_dndl = input('Enter D to DNDL | B to BACK | S to SAVE | X to EXPORT | Q to QUIT : ').lower()
     if (d_to_dndl == 'd'):
         last_char = char_dict
-        char_dict = generate_all()
+        char_dict = generate_all(weighted=True)
         print_char(char_dict)
     elif (d_to_dndl == 'b'):
         if last_char == {}:
@@ -21,6 +21,7 @@ while (d_to_dndl != 'd'):
             print('')
         else:
             print_char(last_char)
+            char_dict = last_char
     elif (d_to_dndl == 's'):
         if char_dict == {}:
             print('')
