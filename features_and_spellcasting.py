@@ -10,6 +10,42 @@ def class_features_table(classchoice):
     featurestable = class_features_df[class_features_df['Class']==classchoice].dropna(axis=1, how='all')
     return featurestable
 
+# create all class features tables and add to dictionary
+def create_all_features_tables():
+    features_table_dict = {}
+    artificer_features_table = class_features_table('Artificer')
+    barbarian_features_table = class_features_table('Barbarian')
+    bard_features_table = class_features_table('Bard')
+    cleric_features_table = class_features_table('Cleric')
+    druid_features_table = class_features_table('Druid')
+    fighter_features_table = class_features_table('Fighter')
+    monk_features_table = class_features_table('Monk')
+    paladin_features_table = class_features_table('Paladin')
+    ranger_features_table = class_features_table('Ranger')
+    rogue_features_table = class_features_table('Rogue')
+    sorcerer_features_table = class_features_table('Sorcerer')
+    warlock_features_table = class_features_table('Warlock')
+    wizard_features_table = class_features_table('Wizard')
+    features_table_dict = {
+    'Artificer': artificer_features_table,
+    'Barbarian': barbarian_features_table,
+    'Bard': bard_features_table,
+    'Cleric': cleric_features_table,
+    'Druid': druid_features_table,
+    'Fighter': fighter_features_table,
+    'Monk': monk_features_table,
+    'Paladin': paladin_features_table,
+    'Ranger': ranger_features_table,
+    'Rogue': rogue_features_table,
+    'Sorcerer': sorcerer_features_table,
+    'Warlock': warlock_features_table,
+    'Wizard': wizard_features_table
+    }
+    return features_table_dict
+
+# one dictionary with every class features table
+features_table_dict = create_all_features_tables()
+
 # spells known dictionaries
 bard_spells_known = {1:2, 2:5, 3:6, 4:7, 5:8, 6:9, 7:10, 8:11, 9:12, 10:14, 11:15, 12:15, 13:16, 14:18, 15:19, 16:19, 17:20, 18:22, 19:22, 20:22}
 ranger_spells_known = {1:0, 2:2, 3:3, 4:3, 5:4, 6:4, 7:5, 8:5, 9:6, 10:6, 11:7, 12:7, 13:8, 14:8, 15:9, 16:9, 17:10, 18:10, 19:11, 20:11}
@@ -115,3 +151,29 @@ def calc_spells_known(modifiers, classchoice, char_level):
         spells_prepared = int_mod + char_level
         spells_known = 6+(char_level-1)*2
     return spells_prepared, spells_known
+
+
+# subset features table up to a level
+def features_table_up_to_level(char_level, features_table):
+    up_to_level = features_table['Level'] <= char_level
+    return features_table[up_to_level]
+
+
+# columns used to subset for spell slots only (except for warlock)
+spell_slot_cols = ['Level',
+                   '1st Level Spell Slots', '2nd Level Spell Slots', '3rd Level Spell Slots',
+                   '4th Level Spell Slots', '5th Level Spell Slots', '6th Level Spell Slots',
+                   '7th Level Spell Slots', '8th Level Spell Slots', '9th Level Spell Slots']
+
+
+# get subset of spell slots table for a given class up to a given level
+def spell_slots_available(classchoice, char_level):
+    featurestable = features_table_up_to_level(char_level, class_features_table(classchoice))
+    spell_slots_table = pd.DataFrame()
+    if classchoice not in ['Paladin', 'Ranger', 'Warlock']:
+        spell_slots_table = featurestable[spell_slot_cols]
+    elif (classchoice in ['Paladin', 'Ranger']) & (char_level >= 2):
+        spell_slots_table = featurestable[spell_slot_cols[0:6]]
+    elif classchoice == 'Warlock':
+        spell_slots_table = featurestable[['Level', 'Spells Known', 'Spell Slots', 'Slot Level']]
+    return spell_slots_table

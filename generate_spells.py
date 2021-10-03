@@ -30,16 +30,6 @@ def pick_spells_of_level(num_spells, spell_level, classchoice):
         x+=1
     return spells
 
-# Artificer Lvl 1   : 2 Cantrips, Spells Equal to Intelligence Modifier + Half Artificer Level Rounded Down (min of 1)
-# Bard Lvl 1        : 2 Cantrips, 4 Spells Known
-# Cleric Lvl 1      : 3 Cantrips, Spells Equal to Wisdom Modifier + Cleric Level (min of 1)
-# Druid Lvl 1       : 2 Cantrips, Spells Equal to Wisdom Modifier + Druid Level (min of 1)
-# Paladin Lvl 1     : No Cantrips, No Spells
-# Ranger Lvl 1      : No Cantrips, No Spells
-# Sorcerer Lvl 1    : 4 Cantrips, 2 Spells Known
-# Warlock Lvl 1     : 2 Cantrips, 2 Spells Known
-# Wizard Lvl 1      : 3 Cantrips, 6 Spells in Spellbook
-
 def generate_spells(modifiers, classchoice, char_level):
     str_mod, dex_mod, con_mod = modifiers['STR'], modifiers['DEX'], modifiers['CON']
     int_mod, wis_mod, cha_mod = modifiers['INT'], modifiers['WIS'], modifiers['CHA']
@@ -49,48 +39,54 @@ def generate_spells(modifiers, classchoice, char_level):
     if (classchoice not in ['Artificer', 'Bard', 'Cleric', 'Druid', 'Sorcerer', 'Warlock', 'Wizard']) & (char_level == 1):
         return spells
     elif classchoice == 'Artificer':
-        spells_known = char_level//2
-        if spells_known == 0:
-            spells_known = 1
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Artificer'),
             '1st Level': pick_spells_of_level(int_mod+spells_known, '1st Level', 'Artificer')
             }
     elif classchoice == 'Bard':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Bard'),
             '1st Level': pick_spells_of_level(4, '1st Level', 'Bard')
             }
     elif classchoice == 'Cleric':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Cleric'),
             '1st Level': pick_spells_of_level(wis_mod+char_level, '1st Level', 'Cleric')
             }
     elif classchoice == 'Druid':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Druid'),
             '1st Level': pick_spells_of_level(wis_mod+char_level, '1st Level', 'Druid')
             }
     elif classchoice == 'Sorcerer':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Sorcerer'),
             '1st Level': pick_spells_of_level(2, '1st Level', 'Sorcerer')
             }
     elif classchoice == 'Warlock':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Warlock'),
             '1st Level': pick_spells_of_level(2, '1st Level', 'Warlock')
             }
     elif classchoice == 'Wizard':
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Wizard'),
             '1st Level': pick_spells_of_level(6, '1st Level', 'Wizard')
             }
     elif (classchoice == 'Paladin') & (char_level >= 2):
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             '1st Level': pick_spells_of_level(cha_mod+char_level//2, '1st Level', 'Paladin')
             }
     elif (classchoice == 'Ranger') & (char_level >= 2):
+        spells_prepared, spells_known = calc_spells_known(modifiers, classchoice, char_level)
         spells = {
             '1st Level': pick_spells_of_level(2, '1st Level', 'Ranger')
             }
