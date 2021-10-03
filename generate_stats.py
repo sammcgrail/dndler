@@ -1,6 +1,10 @@
 import random
 import numpy as np
 
+# formula for ability score --> ability mod
+def calc_mod_from_score(ability_score):
+    ability_mod = (ability_score-10)//2
+    return ability_mod
 
 # abbreviated ability scores
 ability_scores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
@@ -58,23 +62,23 @@ race_bonuses = {
 # simulated dicerolls for base stats
 def roll_4_drop_lowest():
     dicerolls = [random.randint(1,6), random.randint(1,6), random.randint(1,6), random.randint(1,6)]
+    if dicerolls.count(1) >= 2:
+        dicerolls = [random.randint(1,6), random.randint(1,6), random.randint(1,6), random.randint(1,6)]
     dicerolls = sorted(dicerolls, reverse=True)
     dicerolls = dicerolls[0:3]
     return sum(dicerolls)
 
 # generate stats, assigned randomly to ability scores
 def generate_unweighted_stats(race_choice):
-    base_stats = [roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(),
-                  roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()]
+    base_stats = [roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()]
     total_stats = base_stats + race_bonuses[race_choice]
-    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))
+    total_modifiers = calc_mod_from_score(total_stats)
+    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats)), dict(zip(ability_scores, total_modifiers))
 
 # generate stats, assign with priority to certain scores, assign rest randomly
 def generate_weighted_stats(race_choice, class_choice):
     base_stats = [0, 0, 0, 0, 0, 0]
-    sorted_stats = sorted([roll_4_drop_lowest(), roll_4_drop_lowest(),
-                           roll_4_drop_lowest(), roll_4_drop_lowest(),
-                           roll_4_drop_lowest(), roll_4_drop_lowest()], reverse=True)
+    sorted_stats = sorted([roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest(), roll_4_drop_lowest()], reverse=True)
     if class_choice == 'Artificer':
         base_stats[3] = sorted_stats.pop(0)
         base_stats[1] = sorted_stats.pop(0)
@@ -114,10 +118,11 @@ def generate_weighted_stats(race_choice, class_choice):
         random.shuffle(sorted_stats)
         base_stats[0], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
     elif class_choice == 'Paladin':
+        base_stats[5] = sorted_stats.pop(0)
         base_stats[0] = sorted_stats.pop(0)
-        base_stats[4] = sorted_stats.pop(0)
+        base_stats[3] = sorted_stats.pop(0)
         random.shuffle(sorted_stats)
-        base_stats[1], base_stats[2], base_stats[3], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
+        base_stats[1], base_stats[2], base_stats[4] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
     elif class_choice == 'Ranger':
         base_stats[1] = sorted_stats.pop(0)
         base_stats[4] = sorted_stats.pop(0)
@@ -142,4 +147,5 @@ def generate_weighted_stats(race_choice, class_choice):
         random.shuffle(sorted_stats)
         base_stats[0], base_stats[1], base_stats[2], base_stats[4], base_stats[5] = sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0), sorted_stats.pop(0)
     total_stats = base_stats + race_bonuses[race_choice]
-    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats))
+    total_modifiers = calc_mod_from_score(total_stats)
+    return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats)), dict(zip(ability_scores, total_modifiers))

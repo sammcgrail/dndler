@@ -18,6 +18,7 @@ while (d_to_dndl != 'd'):
         last_char = char_dict
         char_dict = generate_all(weighted=True)
         print_char(char_dict)
+        print('')
     elif (d_to_dndl == 'b'):
         if last_char == {}:
             print('')
