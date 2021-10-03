@@ -21,7 +21,7 @@ def generate_mob(num, bg_list):
     all_chars = []
     x = 0
     while x < num:
-        all_chars.append(generate_all(mob_list[x], True))
+        all_chars.append(generate_all(random.randint(1,2), mob_list[x], True))
         x+=1
     return all_chars
 
@@ -39,8 +39,20 @@ def print_char(char_dict):
     print('')
     print('You are a(n) ' + str(char_dict['race']) + ' ' + str(char_dict['class']) + '.')
     print('')
+    print('Current Level: ' + str(char_dict['level']))
+    print('')
     print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
     print('')
+    print('Your Modifiers are: ' + str(char_dict['stats']['Modifiers']))
+    print('')
+    if char_dict['spells'] != {}:
+        print('Your Spell List:')
+        print('')
+        for spell_levels in list(char_dict['spells'].keys()):
+            print(spell_levels + ': ')
+            for magicks in char_dict['spells'][spell_levels]:
+                print(magicks)
+            print('')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
