@@ -5,6 +5,8 @@ def import_class_features_table():
     class_features_df = pd.read_csv('data/features_and_spellcasting.csv')
     return class_features_df
 
+class_features_df = import_class_features_table()
+
 # subset features table, showing only relevant columns for given class
 def class_features_table(classchoice):
     featurestable = class_features_df[class_features_df['Class']==classchoice].dropna(axis=1, how='all')
@@ -47,7 +49,7 @@ def create_all_features_tables():
 features_table_dict = create_all_features_tables()
 
 # spells known dictionaries
-bard_spells_known = {1:2, 2:5, 3:6, 4:7, 5:8, 6:9, 7:10, 8:11, 9:12, 10:14, 11:15, 12:15, 13:16, 14:18, 15:19, 16:19, 17:20, 18:22, 19:22, 20:22}
+bard_spells_known = {1:4, 2:5, 3:6, 4:7, 5:8, 6:9, 7:10, 8:11, 9:12, 10:14, 11:15, 12:15, 13:16, 14:18, 15:19, 16:19, 17:20, 18:22, 19:22, 20:22}
 ranger_spells_known = {1:0, 2:2, 3:3, 4:3, 5:4, 6:4, 7:5, 8:5, 9:6, 10:6, 11:7, 12:7, 13:8, 14:8, 15:9, 16:9, 17:10, 18:10, 19:11, 20:11}
 sorcerer_spells_known = {1:2, 2:3, 3:4, 4:5, 5:6, 6:7, 7:8, 8:9, 9:10, 10:11, 11:12, 12:12, 13:13, 14:13, 15:14, 16:14, 17:15, 18:15, 19:15, 20:15}
 warlock_spells_known = {1:2, 2:3, 3:4, 4:5, 5:6, 6:7, 7:8, 8:9, 9:10, 10:10, 11:11, 12:11, 13:12, 14:12, 15:13, 16:13, 17:14, 18:14, 19:15, 20:15}
@@ -102,8 +104,8 @@ def calc_cantrips_known(classchoice, char_level):
 
 # for calculating spells known based on class level
 def calc_spells_known(modifiers, classchoice, char_level):
-    spells_known = 0
     spells_prepared = 0
+    spells_known = 0
     str_mod, dex_mod, con_mod = modifiers['STR'], modifiers['DEX'], modifiers['CON']
     int_mod, wis_mod, cha_mod = modifiers['INT'], modifiers['WIS'], modifiers['CHA']
     if classchoice == 'Artificer':
@@ -160,18 +162,17 @@ def features_table_up_to_level(char_level, features_table):
 
 
 # columns used to subset for spell slots only (except for warlock)
-spell_slot_cols = ['Level',
-                   '1st Level Spell Slots', '2nd Level Spell Slots', '3rd Level Spell Slots',
-                   '4th Level Spell Slots', '5th Level Spell Slots', '6th Level Spell Slots',
-                   '7th Level Spell Slots', '8th Level Spell Slots', '9th Level Spell Slots']
+spell_slot_cols = ['Level', '1st Level', '2nd Level', '3rd Level', '4th Level', '5th Level', '6th Level', '7th Level', '8th Level', '9th Level']
 
 
 # get subset of spell slots table for a given class up to a given level
 def spell_slots_available(classchoice, char_level):
     featurestable = features_table_up_to_level(char_level, class_features_table(classchoice))
     spell_slots_table = pd.DataFrame()
-    if classchoice not in ['Paladin', 'Ranger', 'Warlock']:
+    if classchoice not in ['Artificer', 'Paladin', 'Ranger', 'Warlock']:
         spell_slots_table = featurestable[spell_slot_cols]
+    elif classchoice == 'Artificer':
+        spell_slots_table = featurestable[spell_slot_cols[0:6]]
     elif (classchoice in ['Paladin', 'Ranger']) & (char_level >= 2):
         spell_slots_table = featurestable[spell_slot_cols[0:6]]
     elif classchoice == 'Warlock':

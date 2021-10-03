@@ -42,13 +42,17 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
         base_stats, race_bonuses, total_stats, total_modifiers = generate_weighted_stats(char_dict['race'], char_dict['class'])
     char_dict['stats'] = {'Base Stats':base_stats, 'Race Bonuses':race_bonuses, 'Total Stats':total_stats, 'Modifiers':total_modifiers}
     char_dict['sources'] = {'Race':race_source, 'Class':class_source, 'Background':background_source}
-    char_dict['spells'] = generate_spells(total_modifiers, char_dict['class'], char_dict['level'])
+    if char_dict['class'] in ['Artificer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard']:
+        char_dict['spells'] = generate_spells(total_modifiers, char_dict['class'], char_dict['level'])
     # return filled character dict
     return char_dict
 
+# columns to use when saving character
+char_cols = ['Name', 'Race', 'Class', 'Level', 'Background', 'Specialty',
+             'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats',
+             'Spells Known', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
 
-char_cols = ['Name', 'Race', 'Class', 'Level', 'Background', 'Specialty', 'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Spells Known', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
-
+# save a character while using dndler
 def save_char(char_dict):
     new_row = [char_dict['name'],
                char_dict['race'],
@@ -70,6 +74,7 @@ def save_char(char_dict):
                ]
     return new_row
 
+# export all saved characters while using dndler
 def export_chars(all_chars):
     dt = datetime.datetime.now()
     dt_str = dt.strftime("%b.%d.%y_%H.%M.%S")
@@ -77,6 +82,7 @@ def export_chars(all_chars):
     df.columns = char_cols
     df.to_csv('all_chars/all_chars_'+dt_str+'.csv', index=False)
 
+# display the details of a character
 def print_char(char_dict):
     os.system('cls')
     print('========================')
@@ -98,10 +104,11 @@ def print_char(char_dict):
         print('Your Spell List:')
         print('')
         for spell_levels in list(char_dict['spells'].keys()):
-            print(spell_levels + ': ')
-            for magicks in char_dict['spells'][spell_levels]:
-                print(magicks)
-            print('')
+            if char_dict['spells'][spell_levels] != []:
+                print(spell_levels + ': ')
+                for magicks in char_dict['spells'][spell_levels]:
+                    print(magicks)
+                print('')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
