@@ -10,7 +10,7 @@ armor = {
 
 # import weapons csv, return df and unique weapon class
 def import_weapons():
-    weapons_df = pd.read_csv('weapons.csv')
+    weapons_df = pd.read_csv('data/weapons.csv')
     weapons_df = weapons_df.fillna('')
     weaponclass = weapons_df['Weapon Class'].unique()
     return weapons_df, weaponclass

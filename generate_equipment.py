@@ -15,7 +15,7 @@ musical_instruments = ['Bagpipes', 'Drum', 'Dulcimer', 'Flute', 'Lute', 'Lyre',
 
 # import weapons csv, return df and unique weapon class
 def import_weapons():
-    weapons_df = pd.read_csv('weapons.csv')
+    weapons_df = pd.read_csv('data/weapons.csv')
     weapons_df = weapons_df.fillna('')
     weaponclass = weapons_df['Weapon Class'].unique()
     return weapons_df, weaponclass
@@ -24,7 +24,7 @@ def import_weapons():
 weapons_df, weaponclass = import_weapons()
 
 # import gear given by background
-bg_gear_df = pd.read_csv('backgrounds_gear.csv')
+bg_gear_df = pd.read_csv('data/backgrounds_gear.csv')
 
 # for choosing based on given weapon class
 def choose_from(weaponclass):

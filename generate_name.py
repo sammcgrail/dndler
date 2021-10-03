@@ -4,7 +4,7 @@ import random
 
 # import names csv
 def import_names():
-    names_df = pd.read_csv('names.csv')
+    names_df = pd.read_csv('data/names.csv')
     first_names = list(names_df[names_df['First/Last']=='First']['Name'])
     last_names = list(names_df[names_df['First/Last']=='Last']['Name'])
     return first_names, last_names

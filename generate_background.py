@@ -3,7 +3,7 @@ import random
 
 # import backgrounds csv to create df
 def import_backgrounds():
-    bg_df = pd.read_csv('backgrounds.csv', sep=',', engine='python')
+    bg_df = pd.read_csv('data/backgrounds.csv', sep=',', engine='python')
     titles = bg_df['Background'].unique()
     return bg_df, titles
 

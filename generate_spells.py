@@ -1,10 +1,11 @@
+from features_and_spellcasting import *
 import pandas as pd
 import numpy as np
 import random
 
 # define spell import function
 def import_spells():
-    spells_df = pd.read_csv('spells.csv')
+    spells_df = pd.read_csv('data/spells.csv')
     spells_dict = {}
     for key_level in spells_df['Level'].unique():
         spells_dict[key_level] = {}
@@ -43,6 +44,8 @@ def generate_spells(modifiers, classchoice, char_level):
     str_mod, dex_mod, con_mod = modifiers['STR'], modifiers['DEX'], modifiers['CON']
     int_mod, wis_mod, cha_mod = modifiers['INT'], modifiers['WIS'], modifiers['CHA']
     spells = {}
+    spells_prepared = 0
+    spells_known = 0
     if (classchoice not in ['Artificer', 'Bard', 'Cleric', 'Druid', 'Sorcerer', 'Warlock', 'Wizard']) & (char_level == 1):
         return spells
     elif classchoice == 'Artificer':
@@ -50,37 +53,37 @@ def generate_spells(modifiers, classchoice, char_level):
         if spells_known == 0:
             spells_known = 1
         spells = {
-            'Cantrip': pick_spells_of_level(2, 'Cantrip', 'Artificer'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Artificer'),
             '1st Level': pick_spells_of_level(int_mod+spells_known, '1st Level', 'Artificer')
             }
     elif classchoice == 'Bard':
         spells = {
-            'Cantrip': pick_spells_of_level(2, 'Cantrip', 'Bard'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Bard'),
             '1st Level': pick_spells_of_level(4, '1st Level', 'Bard')
             }
     elif classchoice == 'Cleric':
         spells = {
-            'Cantrip': pick_spells_of_level(3, 'Cantrip', 'Cleric'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Cleric'),
             '1st Level': pick_spells_of_level(wis_mod+char_level, '1st Level', 'Cleric')
             }
     elif classchoice == 'Druid':
         spells = {
-            'Cantrip': pick_spells_of_level(2, 'Cantrip', 'Druid'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Druid'),
             '1st Level': pick_spells_of_level(wis_mod+char_level, '1st Level', 'Druid')
             }
     elif classchoice == 'Sorcerer':
         spells = {
-            'Cantrip': pick_spells_of_level(4, 'Cantrip', 'Sorcerer'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Sorcerer'),
             '1st Level': pick_spells_of_level(2, '1st Level', 'Sorcerer')
             }
     elif classchoice == 'Warlock':
         spells = {
-            'Cantrip': pick_spells_of_level(2, 'Cantrip', 'Warlock'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Warlock'),
             '1st Level': pick_spells_of_level(2, '1st Level', 'Warlock')
             }
     elif classchoice == 'Wizard':
         spells = {
-            'Cantrip': pick_spells_of_level(3, 'Cantrip', 'Wizard'),
+            'Cantrip': pick_spells_of_level(calc_cantrips_known(classchoice, char_level), 'Cantrip', 'Wizard'),
             '1st Level': pick_spells_of_level(6, '1st Level', 'Wizard')
             }
     elif (classchoice == 'Paladin') & (char_level >= 2):
