@@ -1,4 +1,5 @@
 import pandas as pd
+from collections.abc import Iterable
 
 # import features table merged for all classes
 def import_class_features_table():
@@ -47,6 +48,11 @@ def create_all_features_tables():
 
 # one dictionary with every class features table
 features_table_dict = create_all_features_tables()
+
+# subset features table up to a level
+def features_table_up_to_level(char_level, features_table):
+    up_to_level = features_table['Level'] <= char_level
+    return features_table[up_to_level]
 
 # spells known dictionaries
 bard_spells_known = {1:4, 2:5, 3:6, 4:7, 5:8, 6:9, 7:10, 8:11, 9:12, 10:14, 11:15, 12:15, 13:16, 14:18, 15:19, 16:19, 17:20, 18:22, 19:22, 20:22}
@@ -101,7 +107,6 @@ def calc_cantrips_known(classchoice, char_level):
                 cantrips_known = 5
     return cantrips_known
 
-
 # for calculating spells known based on class level
 def calc_spells_known(modifiers, classchoice, char_level):
     spells_prepared = 0
@@ -154,16 +159,8 @@ def calc_spells_known(modifiers, classchoice, char_level):
         spells_known = 6+(char_level-1)*2
     return spells_prepared, spells_known
 
-
-# subset features table up to a level
-def features_table_up_to_level(char_level, features_table):
-    up_to_level = features_table['Level'] <= char_level
-    return features_table[up_to_level]
-
-
 # columns used to subset for spell slots only (except for warlock)
 spell_slot_cols = ['Level', '1st Level', '2nd Level', '3rd Level', '4th Level', '5th Level', '6th Level', '7th Level', '8th Level', '9th Level']
-
 
 # get subset of spell slots table for a given class up to a given level
 def spell_slots_available(classchoice, char_level):
@@ -178,3 +175,21 @@ def spell_slots_available(classchoice, char_level):
     elif classchoice == 'Warlock':
         spell_slots_table = featurestable[['Level', 'Spells Known', 'Spell Slots', 'Slot Level']]
     return spell_slots_table
+
+# for flattening lists, remove nested lists
+def flatten(lis):
+     for item in lis:
+         if isinstance(item, Iterable) and not isinstance(item, str):
+             for x in flatten(item):
+                 yield x
+         else:
+             yield item
+
+# get features list up to given level
+def get_features(classchoice, char_level):
+    features_list = []
+    featurestable = features_table_up_to_level(char_level, features_table_dict[classchoice]).replace(float('NaN'), '')
+    for item in list(featurestable['Features']):
+        if item != '':
+            features_list.append(item.split(','))
+    return list(flatten(features_list))

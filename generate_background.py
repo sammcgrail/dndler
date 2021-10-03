@@ -5,10 +5,11 @@ import random
 def import_backgrounds():
     bg_df = pd.read_csv('data/backgrounds.csv', sep=',', engine='python')
     titles = bg_df['Background'].unique()
-    return bg_df, titles
+    sourcebooks = bg_df['Source'].unique()
+    return bg_df, titles, sourcebooks
 
 # save df and unique background names
-bg_df, titles = import_backgrounds()
+bg_df, titles, bg_sources = import_backgrounds()
 common = ['Trait', 'Ideal', 'Bond', 'Flaw']
 
 # pick a trait, choice of background optional

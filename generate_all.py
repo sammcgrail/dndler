@@ -19,6 +19,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
                  'level':char_level,
                  'background':{},
                  'stats':{},
+                 'features':[],
                  'equipment':[],
                  'spells':{},
                  'sources':{}}
@@ -36,6 +37,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
     char_dict['class'], class_source = generate_class()
     char_dict['background'], background_source = generate_background(background_choice)
     char_dict['equipment'] = generate_equipment(char_dict['class'], char_dict['background']['Title'])
+    char_dict['features'] = get_features(char_dict['class'], char_dict['level'])
     if weighted==False:
         base_stats, race_bonuses, total_stats, total_modifiers = generate_unweighted_stats(char_dict['race'])
     elif weighted==True:
@@ -49,7 +51,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
 
 # columns to use when saving character
 char_cols = ['Name', 'Race', 'Class', 'Level', 'Background', 'Specialty',
-             'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats',
+             'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Features'
              'Spells Known', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
 
 # save a character while using dndler
@@ -66,6 +68,7 @@ def save_char(char_dict):
                char_dict['background']['Flaw'],
                list(char_dict['stats']['Base Stats'].values()),
                list(char_dict['stats']['Total Stats'].values()),
+               char_dict['features'],
                list(flatten(char_dict['spells'].values())),
                char_dict['equipment'],
                char_dict['sources']['Race'],
@@ -95,11 +98,11 @@ def print_char(char_dict):
     print('You are a(n) ' + str(char_dict['race']) + ' ' + str(char_dict['class']) + '.')
     print('')
     print('Current Level: ' + str(char_dict['level']))
-    print('')
+    print('========================')
     print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
     print('')
     print('Your Modifiers are: ' + str(char_dict['stats']['Modifiers']))
-    print('')
+    print('========================')
     if char_dict['spells'] != {}:
         print('Your Spell List:')
         print('')
@@ -109,6 +112,11 @@ def print_char(char_dict):
                 for magicks in char_dict['spells'][spell_levels]:
                     print(magicks)
                 print('')
+        print('========================')        
+    print('Your Class Features:')
+    for feature in char_dict['features']:
+        print(feature)
+    print('========================')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
@@ -120,12 +128,15 @@ def print_char(char_dict):
     print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
-    print('')
+    print('========================')
     print('Your Gear Contains:')
     for item in char_dict['equipment']:
         print(item)
-    print('')
+    print('========================')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])
     print('Class: ' + char_dict['sources']['Class'])
     print('Background: ' + char_dict['sources']['Background'])
+
+# generate character with weighted stats and level 1 - 5
+# print_char(generate_all(random.randint(1,5), weighted=True))
