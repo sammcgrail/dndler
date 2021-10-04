@@ -32,7 +32,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
     total_stats = {}
     total_modifiers = {}
     # assignments begin here
-    char_dict['race'], race_source = generate_race()
+    char_dict['race'], race_source = generate_race(toggle_array=[1,1,1,1,1,1,1,1,1])
     char_dict['name'] = generate_name()
     char_dict['class'], class_source = generate_class()
     char_dict['background'], background_source = generate_background(background_choice)
