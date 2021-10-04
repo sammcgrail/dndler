@@ -50,11 +50,13 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
     return char_dict
 
 # columns to use when saving character
+# 18 values
 char_cols = ['Name', 'Race', 'Class', 'Level', 'Background', 'Specialty',
              'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Features'
              'Spells Known', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
 
 # save a character while using dndler
+# 18 values
 def save_char(char_dict):
     new_row = [char_dict['name'],
                char_dict['race'],
@@ -112,7 +114,7 @@ def print_char(char_dict):
                 for magicks in char_dict['spells'][spell_levels]:
                     print(magicks)
                 print('')
-        print('========================')        
+        print('========================')
     print('Your Class Features:')
     for feature in char_dict['features']:
         print(feature)
