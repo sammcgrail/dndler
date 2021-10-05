@@ -11,7 +11,7 @@ import datetime
 import os
 
 # master generator
-def generate_all(char_level=1, background_choice='any', weighted=False):
+def generate_all(char_level=1, background_choice='any', class_choice='any', weighted=False):
     # empty character dict that gets filled in by individual generators
     char_dict = {'race':'',
                  'name':'',
@@ -34,7 +34,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
     # assignments begin here
     char_dict['race'], race_source = generate_race(toggle_array=[1,1,1,1,1,1,1,1,1])
     char_dict['name'] = generate_name()
-    char_dict['class'], class_source = generate_class()
+    char_dict['class'], class_source = generate_class(class_choice)
     char_dict['background'], background_source = generate_background(background_choice)
     char_dict['equipment'] = generate_equipment(char_dict['class'], char_dict['background']['Title'])
     char_dict['features'] = get_features(char_dict['class'], char_dict['level'])
@@ -52,7 +52,7 @@ def generate_all(char_level=1, background_choice='any', weighted=False):
 # columns to use when saving character
 # 18 values
 char_cols = ['Name', 'Race', 'Class', 'Level', 'Background', 'Specialty',
-             'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Features'
+             'Trait', 'Ideal', 'Bond', 'Flaw', 'Base Stats', 'Total Stats', 'Features',
              'Spells Known', 'Equipment', 'Race Source', 'Class Source', 'Background Source']
 
 # save a character while using dndler
@@ -101,9 +101,10 @@ def print_char(char_dict):
     print('')
     print('Current Level: ' + str(char_dict['level']))
     print('========================')
-    print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
+    print('                 STR DEX CON INT WIS CHA')
+    print('Your stats are: ' + str(list(char_dict['stats']['Total Stats'].values())))
     print('')
-    print('Your Modifiers are: ' + str(char_dict['stats']['Modifiers']))
+    print('Your Modifiers are: ' + str(list(char_dict['stats']['Modifiers'].values())))
     print('========================')
     if char_dict['spells'] != {}:
         print('Your Spell List:')

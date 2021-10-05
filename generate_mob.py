@@ -34,25 +34,35 @@ def generate_random_mob():
 
 
 def print_char(char_dict):
+    print('========================')
+    print('|         THE          |')
+    print('|        DNDLER        |')
+    print('========================')
     print('')
     print('Hello, ' + str(char_dict['name']) + '.')
     print('')
     print('You are a(n) ' + str(char_dict['race']) + ' ' + str(char_dict['class']) + '.')
     print('')
     print('Current Level: ' + str(char_dict['level']))
-    print('')
+    print('========================')
     print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
     print('')
     print('Your Modifiers are: ' + str(char_dict['stats']['Modifiers']))
-    print('')
+    print('========================')
     if char_dict['spells'] != {}:
         print('Your Spell List:')
         print('')
         for spell_levels in list(char_dict['spells'].keys()):
-            print(spell_levels + ': ')
-            for magicks in char_dict['spells'][spell_levels]:
-                print(magicks)
-            print('')
+            if char_dict['spells'][spell_levels] != []:
+                print(spell_levels + ': ')
+                for magicks in char_dict['spells'][spell_levels]:
+                    print(magicks)
+                print('')
+        print('========================')
+    print('Your Class Features:')
+    for feature in char_dict['features']:
+        print(feature)
+    print('========================')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
     print('')
@@ -64,11 +74,11 @@ def print_char(char_dict):
     print('Ideal: ' + '\"' + char_dict['background']['Ideal'] + '\"')
     print('Bond: ' + '\"' + char_dict['background']['Bond'] + '\"')
     print('Flaw: ' + '\"' + char_dict['background']['Flaw'] + '\"')
-    print('')
+    print('========================')
     print('Your Gear Contains:')
     for item in char_dict['equipment']:
         print(item)
-    print('')
+    print('========================')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])
     print('Class: ' + char_dict['sources']['Class'])
