@@ -26,6 +26,7 @@ def generate_all(char_level=1, background_choice='any', class_choice='any', weig
                  'proficiency':{},
                  'equipment':[],
                  'spells':{},
+                 'weapons':{},
                  'sources':{}}
     # other initializations
     class_source = ''
@@ -49,7 +50,8 @@ def generate_all(char_level=1, background_choice='any', class_choice='any', weig
     char_dict['stats'] = {'Base Stats':base_stats, 'Race Bonuses':race_bonuses, 'Total Stats':total_stats, 'Modifiers':total_modifiers}
     char_dict['hitpoints'] = calc_hitpoints(total_modifiers['CON'], char_dict['class'], char_dict['level'])
     char_dict['proficiency'] = generate_proficiency(total_modifiers, char_dict['class'], char_dict['level'])
-    char_dict['armorclass'] = calc_armorclass(total_modifiers, class_choice, char_dict['proficiency']['Armor'], char_dict['equipment'])
+    char_dict['armorclass'] = calc_armorclass(total_modifiers, char_dict['class'], char_dict['proficiency']['Armor'], char_dict['equipment'])
+    char_dict['weapons'] = fill_weapon_slots(total_modifiers, char_dict['equipment'], char_dict['level'])
     char_dict['sources'] = {'Race':race_source, 'Class':class_source, 'Background':background_source}
     if char_dict['class'] in ['Artificer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard']:
         char_dict['spells'] = generate_spells(total_modifiers, char_dict['class'], char_dict['level'])
@@ -140,6 +142,11 @@ def print_char(char_dict):
     print('Your Gear Contains:')
     for item in char_dict['equipment']:
         print(item)
+    print('========================')
+    print('Your Weapons:')
+    print('Weapon 1: ' + char_dict['weapons']['Weapon 1']['Name'] + ' | ' + char_dict['weapons']['Weapon 1']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 1']['Damage'])
+    print('Weapon 2: ' + char_dict['weapons']['Weapon 2']['Name'] + ' | ' + char_dict['weapons']['Weapon 2']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 2']['Damage'])
+    print('Weapon 3: ' + char_dict['weapons']['Weapon 3']['Name'] + ' | ' + char_dict['weapons']['Weapon 3']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 3']['Damage'])
     print('========================')
     if char_dict['spells'] != {}:
         print('Your Spell List:')

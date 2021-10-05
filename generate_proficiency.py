@@ -1,5 +1,6 @@
 import random
 
+# list of 5e artisans tools
 artisans_tools = ['Alchemist\'s Supplies', 'Brewer\'s Supplies', 'Calligrapher\'s Supplies',
                   'Carpenter\'s Tools', 'Cartographer\'s Tools', 'Cobbler\'s Tools',
                   'Cook\'s Utensils', 'Glassblower\'s Tools', 'Jeweler\'s Tools',
@@ -7,9 +8,11 @@ artisans_tools = ['Alchemist\'s Supplies', 'Brewer\'s Supplies', 'Calligrapher\'
                   'Potter\'s Tools', 'Smith\'s Tools', 'Tinker\'s Tools', 'Weaver\'s Tools',
                   'Woodcarver\'s Tools', 'Thieves\' Tools', 'Navigator\'s Tools']
 
+# list of 5e musical instruments
 musical_instruments = ['Bagpipes', 'Drum', 'Dulcimer', 'Flute', 'Lute', 'Lyre',
                         'Horn', 'Pan Flute', 'Shawm', 'Viol']
 
+# list of 5e character skills
 all_skills = ['Acrobatics', 'Animal', 'Arcana', 'Athletics', 'Deception', 'History',
               'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature',
               'Perception', 'Performance', 'Religion', 'SleightofHand', 'Stealth', 'Survival']
@@ -31,11 +34,13 @@ def calc_proficiency_bonus(char_level):
                     proficiency_bonus = 6
     return proficiency_bonus
 
+# choose proficiencies granted by class, fill out saving throws and skills
 def generate_proficiency(modifiers, classchoice, char_level):
     str_mod, dex_mod, con_mod = modifiers['STR'], modifiers['DEX'], modifiers['CON']
     int_mod, wis_mod, cha_mod = modifiers['INT'], modifiers['WIS'], modifiers['CHA']
     proficiency_bonus = calc_proficiency_bonus(char_level)
     proficient_skills = []
+    # empty dict to be filled
     proficiency_dict = {
     'Armor': [],
     'Weapons': [],
@@ -71,6 +76,7 @@ def generate_proficiency(modifiers, classchoice, char_level):
         },
     'Proficient Skills': []
     }
+    # proficiencies assigned based on options granted by class
     if classchoice == 'Artificer':
         proficiency_dict['Armor'] = ['Light Armor', 'Medium Armor', 'Shields']
         proficiency_dict['Weapons'] = ['Simple Weapons']

@@ -21,7 +21,7 @@ def generate_mob(num, bg_list):
     all_chars = []
     x = 0
     while x < num:
-        all_chars.append(generate_all(random.randint(1,2), mob_list[x], True))
+        all_chars.append(generate_all(random.randint(1,5), background_choice=mob_list[x], weighted=True))
         x+=1
     return all_chars
 
@@ -44,24 +44,23 @@ def print_char(char_dict):
     print('You are a(n) ' + str(char_dict['race']) + ' ' + str(char_dict['class']) + '.')
     print('')
     print('Current Level: ' + str(char_dict['level']))
+    print(str(char_dict['hitpoints']) + ' HP')
+    print(str(char_dict['armorclass']) + ' AC')
     print('========================')
-    print('Your stats are: ' + str(char_dict['stats']['Total Stats']))
+    print('                STR DEX CON INT WIS CHA')
+    print('Your Stats are: ' + str(list(char_dict['stats']['Total Stats'].values())))
     print('')
-    print('Your Modifiers are: ' + str(char_dict['stats']['Modifiers']))
+    print('Your Modifiers are: ' + str(list(char_dict['stats']['Modifiers'].values())))
     print('========================')
-    if char_dict['spells'] != {}:
-        print('Your Spell List:')
-        print('')
-        for spell_levels in list(char_dict['spells'].keys()):
-            if char_dict['spells'][spell_levels] != []:
-                print(spell_levels + ': ')
-                for magicks in char_dict['spells'][spell_levels]:
-                    print(magicks)
-                print('')
-        print('========================')
     print('Your Class Features:')
     for feature in char_dict['features']:
         print(feature)
+    print('========================')
+    print('You Are Proficient With:')
+    print('Armor: ' + str(char_dict['proficiency']['Armor']))
+    print('Weapons: ' + str(char_dict['proficiency']['Weapons']))
+    print('Tools: ' + str(char_dict['proficiency']['Tools']))
+    print('Skills: ' + str(char_dict['proficiency']['Proficient Skills']))
     print('========================')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
@@ -79,10 +78,26 @@ def print_char(char_dict):
     for item in char_dict['equipment']:
         print(item)
     print('========================')
+    print('Your Weapons:')
+    print('Weapon 1: ' + char_dict['weapons']['Weapon 1']['Name'] + ' | ' + char_dict['weapons']['Weapon 1']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 1']['Damage'])
+    print('Weapon 2: ' + char_dict['weapons']['Weapon 2']['Name'] + ' | ' + char_dict['weapons']['Weapon 2']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 2']['Damage'])
+    print('Weapon 3: ' + char_dict['weapons']['Weapon 3']['Name'] + ' | ' + char_dict['weapons']['Weapon 3']['AtkBonus'] + ' | ' + char_dict['weapons']['Weapon 3']['Damage'])
+    print('========================')
+    if char_dict['spells'] != {}:
+        print('Your Spell List:')
+        print('')
+        for spell_levels in list(char_dict['spells'].keys()):
+            if char_dict['spells'][spell_levels] != []:
+                print(spell_levels + ': ')
+                for magicks in char_dict['spells'][spell_levels]:
+                    print(magicks)
+                print('')
+        print('========================')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])
     print('Class: ' + char_dict['sources']['Class'])
     print('Background: ' + char_dict['sources']['Background'])
+    print('========================')
 
 # print each entry in all_chars
 def print_mob(full_mob):
