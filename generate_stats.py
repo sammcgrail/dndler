@@ -62,8 +62,8 @@ race_bonuses = {
 # simulated dicerolls for base stats
 def roll_4_drop_lowest():
     dicerolls = [random.randint(1,6), random.randint(1,6), random.randint(1,6), random.randint(1,6)]
-    if dicerolls.count(1) >= 2:
-        dicerolls = [random.randint(1,6), random.randint(1,6), random.randint(1,6), random.randint(1,6)]
+    #if dicerolls.count(1) >= 2:
+    #    dicerolls = [random.randint(1,6), random.randint(1,6), random.randint(1,6), random.randint(1,6)]
     dicerolls = sorted(dicerolls, reverse=True)
     dicerolls = dicerolls[0:3]
     return sum(dicerolls)
@@ -149,3 +149,59 @@ def generate_weighted_stats(race_choice, class_choice):
     total_stats = base_stats + race_bonuses[race_choice]
     total_modifiers = calc_mod_from_score(total_stats)
     return dict(zip(ability_scores, base_stats)), dict(zip(ability_scores, race_bonuses[race_choice])), dict(zip(ability_scores, total_stats)), dict(zip(ability_scores, total_modifiers))
+
+# calculate hitpoints based on con mod, class, and char level
+def calc_hitpoints(con_mod, classchoice, char_level):
+    hitpoints = 0
+    if classchoice == 'Artificer':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Barbarian':
+        hitpoints = (12+con_mod) + (7+con_mod)*(char_level-1)
+    if classchoice == 'Bard':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Cleric':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Druid':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Fighter':
+        hitpoints = (10+con_mod) + (6+con_mod)*(char_level-1)
+    if classchoice == 'Monk':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Paladin':
+        hitpoints = (10+con_mod) + (6+con_mod)*(char_level-1)
+    if classchoice == 'Ranger':
+        hitpoints = (10+con_mod) + (6+con_mod)*(char_level-1)
+    if classchoice == 'Rogue':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Sorcerer':
+        hitpoints = (6+con_mod) + (4+con_mod)*(char_level-1)
+    if classchoice == 'Warlock':
+        hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
+    if classchoice == 'Wizard':
+        hitpoints = (6+con_mod) + (4+con_mod)*(char_level-1)
+    return hitpoints
+
+# calculate armor class based on armor available in proficiencies and equipment
+def calc_armorclass(modifiers, classchoice, armor_profs, equipment_list):
+    str_mod, dex_mod, con_mod = modifiers['STR'], modifiers['DEX'], modifiers['CON']
+    int_mod, wis_mod, cha_mod = modifiers['INT'], modifiers['WIS'], modifiers['CHA']
+    armorclass = 10+dex_mod
+    if classchoice == 'Barbarian':
+        armorclass = 10+dex_mod+con_mod
+    elif classchoice == 'Monk':
+        armorclass = 10+dex_mod+wis_mod
+    else:
+        if ('Chain Mail' in equipment_list) & ('Heavy Armor' in armor_profs):
+            armorclass = 16
+        elif ('Scale Mail' in equipment_list) & ('Medium Armor' in armor_profs):
+            if dex_mod >= 2:
+                armorclass = 16
+            else:
+                armorclass = 14+dex_mod
+        elif ('Studded Leather Armor' in equipment_list) & ('Light Armor' in armor_profs):
+            armorclass = 12+dex_mod
+        elif ('Leather Armor' in equipment_list) & ('Light Armor' in armor_profs):
+            armorclass = 11+dex_mod
+    if ('Shield' in equipment_list) & ('Shields' in armor_profs):
+        armorclass = armorclass+2
+    return armorclass

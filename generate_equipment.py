@@ -72,7 +72,7 @@ def generate_equipment(classchoice, backgroundchoice):
         equipment_list = [decide_between(['Mace', 'Warhammer']), decide_between(['Scale Mail', 'Leather Mail', 'Chain Mail']),
                           decide_between([['Light Crossbow', '20 Bolts'], choose_from('Simple')]), decide_between(['Priest\'s Pack', 'Explorer\'s Pack']), 'Shield', 'Holy Symbol']
     if classchoice == 'Druid':
-        equipment_list = [decide_between(['Wooden Shield', choose_from('Simple')]), decide_between(['Scimitar', choose_from('Simple Melee')]),
+        equipment_list = [decide_between(['Shield', choose_from('Simple')]), decide_between(['Scimitar', choose_from('Simple Melee')]),
                           'Leather Armor', 'Explorer\'s Pack', 'Druidic Focus']
     if classchoice == 'Fighter':
         equipment_list = [decide_between(['Chain Mail', ['Leather Armor', 'Longbow', '20 Arrows']]),

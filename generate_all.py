@@ -1,11 +1,12 @@
 # import other generators
-from generate_race import *
-from generate_name import *
-from generate_class import *
+from generate_proficiency import *
 from generate_background import *
-from generate_stats import *
 from generate_equipment import *
 from generate_spells import *
+from generate_stats import *
+from generate_class import *
+from generate_race import *
+from generate_name import *
 import pandas as pd
 import datetime
 import os
@@ -17,9 +18,12 @@ def generate_all(char_level=1, background_choice='any', class_choice='any', weig
                  'name':'',
                  'class':'',
                  'level':char_level,
+                 'hitpoints': 0,
+                 'armorclass': 0,
                  'background':{},
                  'stats':{},
                  'features':[],
+                 'proficiency':{},
                  'equipment':[],
                  'spells':{},
                  'sources':{}}
@@ -43,6 +47,9 @@ def generate_all(char_level=1, background_choice='any', class_choice='any', weig
     elif weighted==True:
         base_stats, race_bonuses, total_stats, total_modifiers = generate_weighted_stats(char_dict['race'], char_dict['class'])
     char_dict['stats'] = {'Base Stats':base_stats, 'Race Bonuses':race_bonuses, 'Total Stats':total_stats, 'Modifiers':total_modifiers}
+    char_dict['hitpoints'] = calc_hitpoints(total_modifiers['CON'], char_dict['class'], char_dict['level'])
+    char_dict['proficiency'] = generate_proficiency(total_modifiers, char_dict['class'], char_dict['level'])
+    char_dict['armorclass'] = calc_armorclass(total_modifiers, class_choice, char_dict['proficiency']['Armor'], char_dict['equipment'])
     char_dict['sources'] = {'Race':race_source, 'Class':class_source, 'Background':background_source}
     if char_dict['class'] in ['Artificer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard']:
         char_dict['spells'] = generate_spells(total_modifiers, char_dict['class'], char_dict['level'])
@@ -100,25 +107,23 @@ def print_char(char_dict):
     print('You are a(n) ' + str(char_dict['race']) + ' ' + str(char_dict['class']) + '.')
     print('')
     print('Current Level: ' + str(char_dict['level']))
+    print(str(char_dict['hitpoints']) + ' HP')
+    print(str(char_dict['armorclass']) + ' AC')
     print('========================')
-    print('                 STR DEX CON INT WIS CHA')
-    print('Your stats are: ' + str(list(char_dict['stats']['Total Stats'].values())))
+    print('                STR DEX CON INT WIS CHA')
+    print('Your Stats are: ' + str(list(char_dict['stats']['Total Stats'].values())))
     print('')
     print('Your Modifiers are: ' + str(list(char_dict['stats']['Modifiers'].values())))
     print('========================')
-    if char_dict['spells'] != {}:
-        print('Your Spell List:')
-        print('')
-        for spell_levels in list(char_dict['spells'].keys()):
-            if char_dict['spells'][spell_levels] != []:
-                print(spell_levels + ': ')
-                for magicks in char_dict['spells'][spell_levels]:
-                    print(magicks)
-                print('')
-        print('========================')
     print('Your Class Features:')
     for feature in char_dict['features']:
         print(feature)
+    print('========================')
+    print('You Are Proficient With:')
+    print('Armor: ' + str(char_dict['proficiency']['Armor']))
+    print('Weapons: ' + str(char_dict['proficiency']['Weapons']))
+    print('Tools: ' + str(char_dict['proficiency']['Tools']))
+    print('Skills: ' + str(char_dict['proficiency']['Proficient Skills']))
     print('========================')
     print('Your Story So Far:')
     print('Your Background is as a(n) ' + char_dict['background']['Title'])
@@ -136,10 +141,21 @@ def print_char(char_dict):
     for item in char_dict['equipment']:
         print(item)
     print('========================')
+    if char_dict['spells'] != {}:
+        print('Your Spell List:')
+        print('')
+        for spell_levels in list(char_dict['spells'].keys()):
+            if char_dict['spells'][spell_levels] != []:
+                print(spell_levels + ': ')
+                for magicks in char_dict['spells'][spell_levels]:
+                    print(magicks)
+                print('')
+        print('========================')
     print('Sourcebooks: ')
     print('Race: ' + char_dict['sources']['Race'])
     print('Class: ' + char_dict['sources']['Class'])
     print('Background: ' + char_dict['sources']['Background'])
+    print('========================')
 
 # generate character with weighted stats and level 1 - 5
-# print_char(generate_all(random.randint(1,5), weighted=True))
+# print_char(generate_all(random.randint(1,10), weighted=True))

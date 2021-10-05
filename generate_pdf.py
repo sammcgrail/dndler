@@ -1,3 +1,4 @@
+from generate_proficiency import *
 import PyPDF2
 
 # character sheet one-pager
@@ -24,25 +25,12 @@ filledsheet = open('./charactersheets/filledsheet.pdf', 'wb')
 # create the sheet
 writer.write(filledsheet)
 
-# calculate proficiency
-def calc_proficiency(char_level):
-    proficiency_bonus = 2
-    if char_level >= 5:
-        proficiency_bonus = 3
-        if char_level >= 9:
-            proficiency_bonus = 4
-            if char_level >= 13:
-                proficiency_bonus = 5
-                if char_level >= 17:
-                    proficiency_bonus = 6
-    return proficiency_bonus
-
 # for filling one-pager character sheet
 def char_dict_to_pdf(char_dict):
     emptysheet = PyPDF2.PdfFileReader('./charactersheets/charsheet.pdf')
     writer = PyPDF2.PdfFileWriter()
     writer.insertPage(emptysheet.getPage(0))
-    proficiency_bonus = calc_proficiency(char_dict['level'])
+    proficiency_bonus = calc_proficiency_bonus(char_dict['level'])
     to_be_filled = {
     'ClassLevel': char_dict['class'] + ' ' + str(char_dict['level']),
     'Background': char_dict['background']['Title'],
