@@ -99,9 +99,9 @@ def export_chars(all_chars):
 # pdf generator
 def print_pdf(extended=True):
     if extended == True:
-        char_dict_to_pdf_ext(generate_all())
+        char_dict_to_pdf_ext(generate_all(random.randint(1,20)))
     else:
-        char_dict_to_pdf(generate_all())
+        char_dict_to_pdf(generate_all(random.randint(1,20)))
 
 
 # display the details of a character
