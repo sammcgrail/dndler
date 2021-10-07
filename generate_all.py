@@ -7,6 +7,7 @@ from generate_stats import *
 from generate_class import *
 from generate_race import *
 from generate_name import *
+from generate_pdf import *
 import pandas as pd
 import datetime
 import os
@@ -99,9 +100,11 @@ def export_chars(all_chars):
 # pdf generator
 def print_pdf(extended=True):
     if extended == True:
-        char_dict_to_pdf_ext(generate_all(random.randint(1,20)))
+        char_dict_to_pdf_ext(generate_all(random.randint(1,5), weighted=True))
+        print('Character Sheet Created')
     else:
-        char_dict_to_pdf(generate_all(random.randint(1,20)))
+        char_dict_to_pdf(generate_all(random.randint(1,5), weighted=True))
+        print('Character Sheet Created')
 
 
 # display the details of a character
