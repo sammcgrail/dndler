@@ -18,6 +18,19 @@ def import_spells():
 # import spells df and create dict of spell names by class and level
 spells_df, spells_dict = import_spells()
 
+# calculate proficiency bonus
+def calc_proficiency_bonus(char_level):
+    proficiency_bonus = 2
+    if char_level >= 5:
+        proficiency_bonus = 3
+        if char_level >= 9:
+            proficiency_bonus = 4
+            if char_level >= 13:
+                proficiency_bonus = 5
+                if char_level >= 17:
+                    proficiency_bonus = 6
+    return proficiency_bonus
+
 # pick num_spells of a given spell level available to given class
 def pick_spells_of_level(num_spells, spell_level, classchoice):
     x = 0
@@ -109,3 +122,86 @@ def generate_spells(modifiers, classchoice, char_level):
             '9th Level': pick_spells_of_level(spell_assignment_dict['9th Level'], '9th Level', classchoice)
         }
     return spells
+
+# get spellcaster details for character sheet
+def get_spellcaster_details(char_dict):
+    spellcasting_class = ''
+    spellcasting_ability = ''
+    spell_save_dc = 0
+    spell_atk_bonus = 0
+    proficiency_bonus = calc_proficiency_bonus(char_dict['level'])
+    if char_dict['class'] in ['Artificer', 'Wizard']:
+        spellcasting_class = char_dict['class']
+        spellcasting_ability = 'INT'
+        spell_save_dc = 8+char_dict['stats']['Modifiers']['INT']+proficiency_bonus
+        spell_atk_bonus = char_dict['stats']['Modifiers']['INT']+proficiency_bonus
+    elif char_dict['class'] in ['Bard', 'Paladin', 'Sorcerer', 'Warlock']:
+        spellcasting_class = char_dict['class']
+        spellcasting_ability = 'CHA'
+        spell_save_dc = 8+char_dict['stats']['Modifiers']['CHA']+proficiency_bonus
+        spell_atk_bonus = char_dict['stats']['Modifiers']['CHA']+proficiency_bonus
+    elif char_dict['class'] in ['Cleric', 'Druid', 'Ranger']:
+        spellcasting_class = char_dict['class']
+        spellcasting_ability = 'WIS'
+        spell_save_dc = 8+char_dict['stats']['Modifiers']['WIS']+proficiency_bonus
+        spell_atk_bonus = char_dict['stats']['Modifiers']['WIS']+proficiency_bonus
+    return spellcasting_class, spellcasting_ability, spell_save_dc, spell_atk_bonus
+
+
+# preparation for filling spell slots on pdf
+def char_sheet_format_spells(char_dict):
+    spell_slots_dict = {
+    '1st Level': 0,
+    '2nd Level': 0,
+    '3rd Level': 0,
+    '4th Level': 0,
+    '5th Level': 0,
+    '6th Level': 0,
+    '7th Level': 0,
+    '8th Level': 0,
+    '9th Level': 0
+    }
+    spells_dict = {
+    'Cantrip': ['', '', '', '', '', '', '', '', ''],
+    '1st Level': ['', '', '', '', '', '', '', '', '', '', '', ''],
+    '2nd Level': ['', '', '', '', '', '', '', '', '', '', '', '', ''],
+    '3rd Level': ['', '', '', '', '', '', '', '', '', '', '', '', ''],
+    '4th Level': ['', '', '', '', '', '', '', '', '', '', '', '', ''],
+    '5th Level': ['', '', '', '', '', '', '', '', ''],
+    '6th Level': ['', '', '', '', '', '', '', '', ''],
+    '7th Level': ['', '', '', '', '', '', '', '', ''],
+    '8th Level': ['', '', '', '', '', '', '', '', ''],
+    '9th Level': ['', '', '', '', '', '', '', '', '']
+    }
+    if char_dict['class'] in ['Bard', 'Cleric', 'Druid', 'Sorcerer', 'Wizard']:
+        for key in spell_slots_dict.keys():
+            spell_slots_dict[key] = spell_slots_available(char_dict['class'], char_dict['level']).iloc[-1].replace('-', 0)[key]
+        for key in char_dict['spells'].keys():
+            x = 0
+            for spell in char_dict['spells'][key]:
+                spells_dict[key][x] = spell
+                x+=1
+    elif char_dict['class'] == 'Artificer':
+        for key in list(spell_slots_dict.keys())[0:5]:
+            spell_slots_dict[key] = spell_slots_available(char_dict['class'], char_dict['level']).iloc[-1].replace('-', 0)[key]
+        for key in char_dict['spells'].keys():
+            x = 0
+            for spell in char_dict['spells'][key]:
+                spells_dict[key][x] = spell
+                x+=1
+    elif (char_dict['class'] in ['Paladin', 'Ranger']) & (char_dict['level'] >= 2):
+        for key in list(spell_slots_dict.keys())[0:5]:
+            spell_slots_dict[key] = spell_slots_available(char_dict['class'], char_dict['level']).iloc[-1].replace('-', 0)[key]
+        for key in char_dict['spells'].keys():
+            x = 0
+            for spell in char_dict['spells'][key]:
+                spells_dict[key][x] = spell
+                x+=1
+    elif char_dict['class'] == 'Warlock':
+        spell_slots_dict[spell_slots_available('Warlock', char_dict['level']).iloc[-1]['Slot Level']] = spell_slots_available('Warlock', char_dict['level']).iloc[-1]['Spell Slots']
+        for key in char_dict['spells'].keys():
+            x = 0
+            for spell in char_dict['spells'][key]:
+                spells_dict[key][x] = spell
+                x+=1
+    return spell_slots_dict, spells_dict

@@ -96,6 +96,14 @@ def export_chars(all_chars):
     df.columns = char_cols
     df.to_csv('all_chars/all_chars_'+dt_str+'.csv', index=False)
 
+# pdf generator
+def print_pdf(extended=True):
+    if extended == True:
+        char_dict_to_pdf_ext(generate_all())
+    else:
+        char_dict_to_pdf(generate_all())
+
+
 # display the details of a character
 def print_char(char_dict):
     os.system('cls')

@@ -154,3 +154,20 @@ def fill_weapon_slots(modifiers, equipment_list, char_level):
             three_weapons_dict['Weapon '+str(num+1)]['AtkBonus'] = '+'+str(str_mod+proficiency_bonus)
             three_weapons_dict['Weapon '+str(num+1)]['Damage'] = str(weapons_df.loc[weapons_df['Name']==weapons_to_slot[num]]['Damage Formula'].item())+'+'+str(str_mod)
     return three_weapons_dict
+
+# for filling in money
+def fill_coin_slots(equipment_list):
+    money = equipment_list.pop(-1)
+    coin_dict = {
+    'copper': 0,
+    'silver': 0,
+    'electrum': 0,
+    'gold': 0,
+    'platinum': 0
+    }
+    if 'CP' in money: coin_dict['copper'] = money.split()[0]
+    elif 'SP' in money: coin_dict['silver'] = money.split()[0]
+    elif 'EP' in money: coin_dict['electrum'] = money.split()[0]
+    elif 'GP' in money: coin_dict['gold'] = money.split()[0]
+    elif 'PP' in money: coin_dict['platinum'] = money.split()[0]
+    return coin_dict
