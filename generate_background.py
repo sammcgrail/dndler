@@ -8,6 +8,33 @@ def import_backgrounds():
     sourcebooks = bg_df['Source'].unique()
     return bg_df, titles, sourcebooks
 
+# Eberron, PHB, Sword Coast, Tomb
+# [0,0,1,0,0,0,0,0,0,0,1,0,1,1]
+
+# apply filter
+def apply_sourcebook_filter(toggle_array=[1,1,1,1,1,1,1,1,1,1,1,1,1,1]):
+    active_sourcebooks = []
+    # 14 sourcebooks
+    background_sourcebooks = ["Baldur's Gate - Descent into Avernus",
+                              'Curse of Strahd',
+                              'Eberron: Rising from the Last War',
+                              "Explorer's Guide to Wildemount",
+                              'Ghosts of Saltmarsh',
+                              "Guildmaster's Guide to Ravnica",
+                              'Mulmaster Bonds and Backgrounds',
+                              'Mythic Odysseys of Theros',
+                              'Plane Shift - Amonkhet',
+                              'Plane Shift - Innistrad',
+                              "Player's Handbook",
+                              'State of Hillsfar',
+                              "Sword Coast Adventurer's Guide",
+                              'Tomb of Annihilation']
+    sourcebook_toggle = dict(zip(background_sourcebooks, toggle_array))
+    for sbook in list(sourcebook_toggle.keys()):
+        if sourcebook_toggle[sbook] == 1:
+            active_sourcebooks.append(sbook)
+    return active_sourcebooks
+
 # save df and unique background names
 bg_df, titles, bg_sources = import_backgrounds()
 common = ['Trait', 'Ideal', 'Bond', 'Flaw']

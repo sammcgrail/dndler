@@ -18,6 +18,17 @@ def import_spells():
 # import spells df and create dict of spell names by class and level
 spells_df, spells_dict = import_spells()
 
+# for finding specific spell details
+def get_spell_details(spell):
+    spell_details = {
+    'School': spells_df.loc[spells_df['Name']==spell].iloc[0]['School'],
+    'Casting Time': spells_df.loc[spells_df['Name']==spell].iloc[0]['Casting Time'],
+    'Range': spells_df.loc[spells_df['Name']==spell].iloc[0]['Range'],
+    'Duration': spells_df.loc[spells_df['Name']==spell].iloc[0]['Duration'],
+    'Components': spells_df.loc[spells_df['Name']==spell].iloc[0]['Components']
+    }
+    return spell_details
+
 # calculate proficiency bonus
 def calc_proficiency_bonus(char_level):
     proficiency_bonus = 2

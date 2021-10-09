@@ -38,7 +38,7 @@ def generate_all(char_level=1, background_choice='any', class_choice='any', weig
     total_stats = {}
     total_modifiers = {}
     # assignments begin here
-    char_dict['race'], race_source = generate_race(toggle_array=[1,1,1,1,1,1,1,1,1])
+    char_dict['race'], race_source = generate_race()
     char_dict['name'] = generate_name()
     char_dict['class'], class_source = generate_class(class_choice)
     char_dict['background'], background_source = generate_background(background_choice)
@@ -166,7 +166,7 @@ def print_char(char_dict):
             if char_dict['spells'][spell_levels] != []:
                 print(spell_levels + ': ')
                 for magicks in char_dict['spells'][spell_levels]:
-                    print(magicks)
+                    print(magicks + ': [' + get_spell_details(magicks)['School'] + '] [' + get_spell_details(magicks)['Casting Time'] + '] [' + get_spell_details(magicks)['Range'] + '] [' + get_spell_details(magicks)['Duration'] + '] [' + get_spell_details(magicks)['Components'] + ']' )
                 print('')
         print('========================')
     print('Sourcebooks: ')
