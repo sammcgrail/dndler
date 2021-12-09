@@ -14,9 +14,6 @@ def stringify_character(char_dict):
     stringify(char_dict['proficiency']['Skills'])
 
 char_dict = generate_all(5, weighted=True)
-
 stringify_character(char_dict)
-
 json_char = json.dumps(char_dict)
-
 print(json_char)
