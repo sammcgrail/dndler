@@ -1,15 +1,32 @@
-let toggleOptionViz = (sendName, targetName) => {
-    const options = document.getElementsByName(sendName);
+let toggleOptionViz = (sendID, targetName="", targetID="") => {
+    const sending = document.getElementById(sendID);
     // set as off or invisible for init
     let viz = "none";
-    for(let i=0; i<options.length; ++i)
+    if(sending.type == "checkbox")
     {
-        // one of the controlling options has been toggled on
-        if(options[i].checked)
+        if(sending.checked)
         {
             viz = "block";
-            break;
         }
     }
-    document.getElementById(targetName).style.display = viz;
+
+    if(targetName!=="")
+    {
+        console.log(targetName);
+        const targets = document.getElementsByClassName(targetName);
+        console.log(targets.length);
+        for(let i=0, n=targets.length; i<n; ++i){
+            if(targets[i].id !== targetID) //when both ID and name are given, ID is excluded
+            {
+                targets[i].style.display = viz;
+
+            }
+        }
+    }
+    else if(targetID!=="") //if only ID is given, target only ID
+    {
+        document.getElementById(targetID).style.display = viz;
+    }
+    else
+        return;
 };
