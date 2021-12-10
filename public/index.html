@@ -1,7 +1,9 @@
 <html>
     <head>
         <link href="stylesheets/styles.css" type="text/css" rel="stylesheet">
+        <script language ="JavaScript" src="js/mouseOver.js" type="text/javascript" rel="" async></script>
         <script language ="JavaScript" src="js/toggleOptionViz.js" type="text/javascript" rel="" async></script>
+        <script language ="JavaScript" src="js/toggleManyOptions.js" type="text/javascript" rel=""></script>
     </head>
     <body>
         <section class="header">
@@ -13,77 +15,85 @@
             <h2>OPTIONS</h2>
             <section class="source-list option-list">
                 <h3>Source Materials</h3>
-                <div class="option-container option-block">
-                    <input type="checkbox" id="PHB" name="PHB" value="PHB" class="hidden" checked>
-                    <label for="PHB">Player's Handbook</label>
+                <div class="option-container option-block source-container">
+                    <input type="checkbox" id="PHB" name="source-option" value="PHB" class="hidden" checked oninput="toggleOptionViz('PHB', 'class-container', 'arti-container')">
+                    <label for="PHB" onmouseover="mouseOver('PHB')">Player's Handbook</label>
                 </div>
                 <div class="option-row">
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="DIA" name="DIA" value="DIA" class="hidden" checked>
-                        <label for="DIA">Baldur's Gate: Descent into Avernus</label>
+                    <div class="option-container source-container" id="DIA-container">
+                        <input type="checkbox" id="DIA" name="source-option" value="DIA" class="hidden" checked>
+                        <label for="DIA" onmouseover="mouseOver('DIA')">Baldur's Gate: Descent into Avernus</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="COS" name="COS" value="COS" class="hidden" checked>
-                        <label for="COS">Curse of Strahd</label>
+                    <div class="option-container source-container" id="COS-container">
+                        <input type="checkbox" id="COS" name="source-option" value="COS" class="hidden" checked>
+                        <label for="COS" onmouseover="mouseOver('COS')">Curse of Strahd</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="EEP" name="EEP" value="EEP" class="hidden" checked>
-                        <label for="EEP">Elemental Evil Player's Companion</label>
+                    <div class="option-container source-container" id="EEP-container">
+                        <input type="checkbox" id="EEP" name="source-option" value="EEP" class="hidden" checked>
+                        <label for="EEP" onmouseover="mouseOver('EEP')">Elemental Evil Player's Companion</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="GOS" name="GOS" value="GOS" class="hidden" checked>
-                        <label for="GOS">Ghosts of Saltmarsh</label>
+                    <div class="option-container source-container" id="GOS-container">
+                        <input type="checkbox" id="GOS" name="source-option" value="GOS" class="hidden" checked>
+                        <label for="GOS" onmouseover="mouseOver('GOS')">Ghosts of Saltmarsh</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="MTF" name="MTF" value="MTF" class="hidden" checked>
-                        <label for="MTF">Mordenkainen's Tome of Foes</label>
+                    <div class="option-container source-container" id="MTF-container">
+                        <input type="checkbox" id="MTF" name="source-option" value="MTF" class="hidden" checked>
+                        <label for="MTF" onmouseover="mouseOver('MTF')">Mordenkainen's Tome of Foes</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="SWAG" name="SWAG" value="SWAG" class="hidden" checked>
-                        <label for="SWAG">Sword Coast Adventurer's Guide</label>
+                    <div class="option-container source-container" id="SWAG-container">
+                        <input type="checkbox" id="SWAG" name="source-option" value="SWAG" class="hidden" checked>
+                        <label for="SWAG" onmouseover="mouseOver('SWAG')">Sword Coast Adventurer's Guide</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="TCE" name="TCE" value="TCE" class="hidden" checked onclick="toggleOptionViz('TCE', 'arti-container')">
-                        <label for="TCE">Tasha's Cauldron of Everything</label>
+                    <div class="option-container source-container" id="TCE-container">
+                        <input type="checkbox" id="TCE" name="source-option" value="TCE" class="hidden" oninput="toggleOptionViz('TCE', '', 'arti-container')" checked>
+                        <label for="TCE" onmouseover="mouseOver('TCE')">Tasha's Cauldron of Everything</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="TOA" name="TOA" value="TOA" class="hidden" checked>
-                        <label for="TOA">Tomb of Annihilation</label>
+                    <div class="option-container source-container" id="TOA-container">
+                        <input type="checkbox" id="TOA" name="source-option" value="TOA" class="hidden" checked>
+                        <label for="TOA" onmouseover="mouseOver('TOA')">Tomb of Annihilation</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="VOLO" name="VOLO" value="VOLO" class="hidden" checked>
-                        <label for="VOLO">Volo's Guide to Monsters</label>
+                    <div class="option-container source-container" id="VOLO-container">
+                        <input type="checkbox" id="VOLO" name="source-option" value="VOLO" class="hidden" checked>
+                        <label for="VOLO" onmouseover="mouseOver('VOLO')">Volo's Guide to Monsters</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="WILD" name="WILD" value="WILD" class="hidden" checked>
-                        <label for="WILD">Wild Beyond the Witchlight</label>
+                    <div class="option-container source-container" id="WILD-container">
+                        <input type="checkbox" id="WILD" name="source-option" value="WILD" class="hidden" checked>
+                        <label for="WILD" onmouseover="mouseOver('WILD')">Wild Beyond the Witchlight</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="XAN" name="XAN" value="XAN" class="hidden" checked>
-                        <label for="XAN">Xanathar's Guide to Everything</label>
+                    <div class="option-container source-container" id="XAN-container">
+                        <input type="checkbox" id="XAN" name="source-option" value="XAN" class="hidden" checked>
+                        <label for="XAN" onmouseover="mouseOver('XAN')">Xanathar's Guide to Everything</label>
                     </div>
                 </div>
                 <div class="option-row">
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="AI" name="AI" value="AI" class="hidden">
-                        <label for="AI">Acquistions Incorporated</label>
+                    <div class="option-container source-container" id="AI-container">
+                        <input type="checkbox" id="AI" name="source-option" value="AI" class="hidden">
+                        <label for="AI" onmouseover="mouseOver('AI')">Acquistions Incorporated</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="EBE" name="EBE" value="EBE" class="hidden">
-                        <label for="EBE">Eberron: Rising from the Last War</label>
+                    <div class="option-container source-container" id="EBE-container">
+                        <input type="checkbox" id="EBE" name="source-option" value="EBE" class="hidden">
+                        <label for="EBE" onmouseover="mouseOver('EBE')">Eberron: Rising from the Last War</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="EGW" name="EGW" value="EGW" class="hidden">
-                        <label for="EGW">Explorer's Guide to Wildemount</label>
+                    <div class="option-container source-container" id="EGW-container">
+                        <input type="checkbox" id="EGW" name="source-option" value="EGW" class="hidden">
+                        <label for="EGW" onmouseover="mouseOver('EGW')">Explorer's Guide to Wildemount</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="RAV" name="RAV" value="RAV" class="hidden">
-                        <label for="RAV">Guildmasters' Guide to Ravnica</label>
+                    <div class="option-container source-container" id="RAV-container">
+                        <input type="checkbox" id="RAV" name="source-option" value="RAV" class="hidden">
+                        <label for="RAV" onmouseover="mouseOver('RAV')">Guildmasters' Guide to Ravnica</label>
                     </div>
-                    <div class="option-container source-container">
-                        <input type="checkbox" id="MOT" name="MOT" value="MOT" class="hidden">
-                        <label for="MOT">Mythic Odysseys of Theros</label>
+                    <div class="option-container source-container" id="MOT-container">
+                        <input type="checkbox" id="MOT" name="source-option" value="MOT" class="hidden">
+                        <label for="MOT" onmouseover="mouseOver('MOT')">Mythic Odysseys of Theros</label>
                     </div>
+                </div>
+                <div class="option-container select-container">
+                    <input type="button" id="source-sel" name="source-sel" class="hidden" onclick="toggleManyOptions(true, 'source-option')">
+                    <label for="source-sel">Select All</label>
+                </div>
+                <div class="option-container select-container">
+                    <input type="button" id="source-des" name="source-des" class="hidden" onclick="toggleManyOptions(false, 'source-option')">
+                    <label for="source-des">Deselect All</label>
                 </div>
                 <p>(If none are selected, all will be used)</p>
             </section>
@@ -91,61 +101,70 @@
             <section class="class-list option-list">
                 <h3>Classes</h3>
                 <div class="option-row">
-                    <div class="option-container class-container arti-container" name="arti-container" id="arti-container">
-                        <input type="checkbox" id="arti" name="arti" value="artiarian" class="hidden">
-                        <label for="arti">Artificer</label>
+                    <div class="option-container class-container" id="arti-container">
+                        <input type="checkbox" id="arti" name="class-option" value="arti" class="hidden">
+                        <label for="arti" onmouseover="mouseOver('arti')">Artificer</label>
                     </div>
-                    <div class="option-container class-container barb-container">
-                        <input type="checkbox" id="barb" name="barb" value="barbarian" class="hidden" checked>
-                        <label for="barb">Barbarian</label>
+                    <div class="option-container class-container" id="barb-container">
+                        <input type="checkbox" id="barb" name="class-option" value="barb" class="hidden" checked>
+                        <label for="barb" onmouseover="mouseOver('barb')">Barbarian</label>
                     </div>
-                    <div class="option-container class-container cler-container">
-                        <input type="checkbox" id="cler" name="cler" value="clerarian" class="hidden" checked>
-                        <label for="cler">Cleric</label>
+                    <div class="option-container class-container" id="cler-container">
+                        <input type="checkbox" id="cler" name="class-option" value="cler" class="hidden" checked>
+                        <label for="cler" onmouseover="mouseOver('cler')">Cleric</label>
                     </div>
-                    <div class="option-container class-container drui-container">
-                        <input type="checkbox" id="drui" name="drui" value="druiarian" class="hidden" checked>
-                        <label for="drui">Druid</label>
+                    <div class="option-container class-container" id="drui-container">
+                        <input type="checkbox" id="drui" name="class-option" value="drui" class="hidden" checked>
+                        <label for="drui" onmouseover="mouseOver('drui')">Druid</label>
                     </div>
-                    <div class="option-container class-container figh-container">
-                        <input type="checkbox" id="figh" name="figh" value="figharian" class="hidden" checked>
-                        <label for="figh">Fighter</label>
+                    <div class="option-container class-container" id="figh-container">
+                        <input type="checkbox" id="figh" name="class-option" value="figh" class="hidden" checked>
+                        <label for="figh" onmouseover="mouseOver('figh')">Fighter</label>
                     </div>
-                    <div class="option-container class-container monk-container">
-                        <input type="checkbox" id="monk" name="monk" value="monkarian" class="hidden" checked>
-                        <label for="monk">Monk</label>
+                    <div class="option-container class-container" id="monk-container">
+                        <input type="checkbox" id="monk" name="class-option" value="monk" class="hidden" checked>
+                        <label for="monk" onmouseover="mouseOver('monk')">Monk</label>
                     </div>
-                    <div class="option-container class-container pala-container">
-                        <input type="checkbox" id="pala" name="pala" value="palaarian" class="hidden" checked>
-                        <label for="pala">Paladin</label>
+                    <div class="option-container class-container" id="pala-container">
+                        <input type="checkbox" id="pala" name="class-option" value="pala" class="hidden" checked>
+                        <label for="pala" onmouseover="mouseOver('pala')">Paladin</label>
                     </div>
-                    <div class="option-container class-container rang-container">
-                        <input type="checkbox" id="rang" name="rang" value="rangarian" class="hidden" checked>
-                        <label for="rang">Ranger</label>
+                    <div class="option-container class-container" id="rang-container">
+                        <input type="checkbox" id="rang" name="class-option" value="rang" class="hidden" checked>
+                        <label for="rang" onmouseover="mouseOver('rang')">Ranger</label>
                     </div>
-                    <div class="option-container class-container rogu-container">
-                        <input type="checkbox" id="rogu" name="rogu" value="roguarian" class="hidden" checked>
-                        <label for="rogu">Rogue</label>
+                    <div class="option-container class-container" id="rogu-container">
+                        <input type="checkbox" id="rogu" name="class-option" value="rogu" class="hidden" checked>
+                        <label for="rogu" onmouseover="mouseOver('rogu')">Rogue</label>
                     </div>
-                    <div class="option-container class-container sorc-container">
-                        <input type="checkbox" id="sorc" name="sorc" value="sorcarian" class="hidden" checked>
-                        <label for="sorc">Sorcerer</label>
+                    <div class="option-container class-container" id="sorc-container">
+                        <input type="checkbox" id="sorc" name="class-option" value="sorc" class="hidden" checked>
+                        <label for="sorc" onmouseover="mouseOver('sorc')">Sorcerer</label>
                     </div>
-                    <div class="option-container class-container warl-container">
-                        <input type="checkbox" id="warl" name="warl" value="warlarian" class="hidden" checked>
-                        <label for="warl">Warlock</label>
+                    <div class="option-container class-container" id="warl-container">
+                        <input type="checkbox" id="warl" name="class-option" value="warl" class="hidden" checked>
+                        <label for="warl" onmouseover="mouseOver('warl')">Warlock</label>
                     </div>
-                    <div class="option-container class-container wiza-container">
-                        <input type="checkbox" id="wiza" name="wiza" value="wizaarian" class="hidden" checked>
-                        <label for="wiza">Wizard</label>
+                    <div class="option-container class-container" id="wiza-container">
+                        <input type="checkbox" id="wiza" name="class-option" value="wiza" class="hidden" checked>
+                        <label for="wiza" onmouseover="mouseOver('wiza')">Wizard</label>
+                    </div>
                 </div>
+                <div class="option-container select-container">
+                    <input type="button" id="class-sel" name="class-sel" class="hidden" onclick="toggleManyOptions(true, 'class-option')">
+                    <label for="class-sel">Select All</label>
                 </div>
+                <div class="option-container select-container">
+                    <input type="button" id="class-des" name="class-des" class="hidden" onclick="toggleManyOptions(false, 'class-option')">
+                    <label for="class-des">Deselect All</label>
+                </div>
+                <p>(If none are selected, all will be used)</p>
             </section>
             <hr class="rounded divider">
             <section class="text-container option-list">
                 <h3>Character Level</h3>
                 <div class="option-container level-container">
-                    <input id="minlev" name="minlev" value=0 type="number" min="0" max="19">
+                    <input id="minlev" name="minlev" value=0 type="number" min="0" max="20">
                     <label for="minlev">Minimum Level</label>
                 </div>
                 <div class="option-container level-container">
@@ -158,12 +177,12 @@
             <section class="other-container option-list">
                 <h3>Other</h3>
                 <div class="option-container">
-                    <input type="checkbox" id="weight" name="weight" value="weight" class="hidden" checked>
-                    <label for="weight">Class-weighted stats?</label>
+                    <input type="checkbox" id="weight" name="misc-option" value="weight" class="hidden" checked>
+                    <label for="weight" onmouseover="mouseOver('weight')">Class-weighted stats?</label>
                 </div>
             </section>
             <div class="option-container submit-container">
-                <input class="sparkle u-hover--sparkle" id="submit" name="submit" type="submit" value="SUBMIT">
+                <input class="" id="submit" name="submit" type="submit" value="SUBMIT">
             </div>
         </form>
     </body>
