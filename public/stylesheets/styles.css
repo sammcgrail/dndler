@@ -18,6 +18,11 @@
     padding: 4px;
 }
 
+.option-container label:hover {
+    background-color: rgb(151, 151, 151);
+    transition: background-color 0.2s 0s;
+}
+
 .option-container input[type=checkbox].hidden {
     opacity: 0;
     position: absolute;
@@ -26,11 +31,8 @@
 .option-container input[type="checkbox"]:checked + label {
     background-color: rgb(73, 138, 96);
     color: #fff;
+    transition: background-color 0.1s 0s;
 }
-
-.option-container.class-container {
-    flex: 0 0 20%;
-} 
 
 .level-container input {
     width: 50px;
@@ -44,3 +46,12 @@ hr.rounded {
     border-top: 3px solid #bbb;
     border-radius: 5px;
 }
+
+.submit-container {
+    margin-top: 20px;
+}
+
+.submit-container input {
+    font-size: xx-large;
+}
+
