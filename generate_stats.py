@@ -179,7 +179,7 @@ def calc_hitpoints(con_mod, classchoice, char_level):
         hitpoints = (8+con_mod) + (5+con_mod)*(char_level-1)
     if classchoice == 'Wizard':
         hitpoints = (6+con_mod) + (4+con_mod)*(char_level-1)
-    return str(hitpoints)
+    return hitpoints
 
 # calculate armor class based on armor available in proficiencies and equipment
 def calc_armorclass(modifiers, classchoice, armor_profs, equipment_list):
@@ -204,4 +204,4 @@ def calc_armorclass(modifiers, classchoice, armor_profs, equipment_list):
             armorclass = 11+dex_mod
     if ('Shield' in equipment_list) & ('Shields' in armor_profs):
         armorclass = armorclass+2
-    return str(armorclass)
+    return armorclass

@@ -1,19 +1,23 @@
 import json
+import copy
 from generate_all import *
 
 def stringify(dict):
     for k in dict:
         dict[k] = str(dict[k])
 
-def stringify_character(char_dict):
-    stringify(char_dict['stats']['Base Stats'])
-    stringify(char_dict['stats']['Race Bonuses'])
-    stringify(char_dict['stats']['Total Stats'])
-    stringify(char_dict['stats']['Modifiers'])
-    stringify(char_dict['proficiency']['Saving Throws'])
-    stringify(char_dict['proficiency']['Skills'])
+def stringify_character(dict):
+    dict['hitpoints'] = str(dict['hitpoints'])
+    dict['armorclass'] = str(dict['armorclass'])
+    stringify(dict['stats']['Base Stats'])
+    stringify(dict['stats']['Race Bonuses'])
+    stringify(dict['stats']['Total Stats'])
+    stringify(dict['stats']['Modifiers'])
+    stringify(dict['proficiency']['Saving Throws'])
+    stringify(dict['proficiency']['Skills'])
 
-char_dict = generate_all(5, weighted=True)
-stringify_character(char_dict)
-json_char = json.dumps(char_dict)
-print(json_char)
+def dict_to_json(dict):
+    copy_char = copy.deepcopy(dict)
+    stringify_character(copy_char)
+    json_char = json.dumps(copy_char)
+    return json_char
