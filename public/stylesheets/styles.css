@@ -1,7 +1,3 @@
-::selection {
-    background-color:rgba(0,0,0,0);
-}
-
 .header {
     text-align: center;
 }
@@ -9,6 +5,10 @@
 hr.rounded {
     border-top: 3px solid #bbb;
     border-radius: 5px;
+}
+
+.options ::selection {
+    background-color: rgba(0,0,0,0);
 }
 
 .option-row {
@@ -28,7 +28,7 @@ hr.rounded {
     transition: background-color 0.1s 0s;
 }
 
-.option-container label:hover {
+.option-container input[type=checkbox] + label:hover {
     background-color: rgb(151, 151, 151);
 }
 
