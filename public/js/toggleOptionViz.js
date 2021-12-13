@@ -12,9 +12,7 @@ let toggleOptionViz = (sendID, targetName="", targetID="") => {
 
     if(targetName!=="")
     {
-        console.log(targetName);
         const targets = document.getElementsByClassName(targetName);
-        console.log(targets.length);
         for(let i=0, n=targets.length; i<n; ++i){
             if(targets[i].id !== targetID) //when both ID and name are given, ID is excluded
             {
