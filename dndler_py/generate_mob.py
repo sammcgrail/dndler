@@ -111,7 +111,7 @@ def print_mob(full_mob):
 
 # common mobs:
 pirate_mob = generate_mob(12, ['Sailor', 'Pirate', 'Criminal'])
-military_mob = generate_mob(12, ['Soldier', 'Knight', 'Noble'])
+military_mob = generate_mob(12, ['Soldier', 'Knight'])
 streetrat_mob = generate_mob(12, ['Urchin', 'Charlatan', 'Spy'])
 wise_mob = generate_mob(8, ['Acolyte', 'Sage', 'Hermit'])
-merchantfolk = generate_mob(10, ['Guild Artisan', 'Guild Merchant', 'Entertainer'])
+merchantfolk = generate_mob(20, ['Guild Artisan', 'Guild Merchant', 'Entertainer'])

@@ -1,0 +1,29 @@
+{
+  "name": "dndler",
+  "version": "1.0.0",
+  "description": "THIS IS THE DINDLER ",
+  "main": "generateAll.js",
+  "scripts": {
+    "test": "generateCharacter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanadgir/dndler.git"
+  },
+  "keywords": [
+    "dnd",
+    "ttrpg",
+    "dindl",
+    "mins",
+    "generator"
+  ],
+  "author": "Varun Nadgir, Tyler Brandt, Graham Gilpatric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanadgir/dndler/issues"
+  },
+  "homepage": "https://github.com/vanadgir/dndler#readme",
+  "dependencies": {
+    "jquery-csv": "^1.0.21"
+  }
+}
