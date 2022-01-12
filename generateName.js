@@ -1,12 +1,14 @@
-const csv = require('jquery-csv');
+// const csv = require('jquery-csv');
 
-namesObject = jquerycsv.csv.toArray('./data/names.csv');
+// namesObject = jquerycsv.csv.toArray('./data/names.csv');
 
-firstNames = ['Greg', 'Robert', 'Baernaldus', 'Joe'];
-lastNames = ['Roberts', 'the Brown', 'Smith', 'the Noob'];
+const firstNames = ['Greg', 'Robert', 'Baernaldus', 'Joe'];
+const lastNames = ['Roberts', 'the Brown', 'Smith', 'the Noob'];
 
-function generateName() {
-    firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
+const generateName = () => {
+    let firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    let lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
     return firstName + ' ' + lastName
 }
+
+export default generateName;

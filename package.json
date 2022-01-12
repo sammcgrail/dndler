@@ -2,8 +2,11 @@
   "name": "dndler",
   "version": "1.0.0",
   "description": "THIS IS THE DINDLER ",
+  "type": "module",
   "main": "generateAll.js",
   "scripts": {
+    "build": "babel generateAll.js -d dist",
+    "start": "npm run build && node dist/generateAll.js",
     "test": "generateCharacter"
   },
   "repository": {
@@ -25,5 +28,11 @@
   "homepage": "https://github.com/vanadgir/dndler#readme",
   "dependencies": {
     "jquery-csv": "^1.0.21"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "lodash": "^4.17.21"
   }
 }
