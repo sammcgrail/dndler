@@ -1,4 +1,4 @@
-var csv = require('jquery-csv');
+const csv = require('jquery-csv');
 
 namesObject = jquerycsv.csv.toArray('./data/names.csv');
 
