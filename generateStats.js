@@ -59,7 +59,7 @@ const races = Object.keys(raceBonuses);
 
 // function to calculate mod based on total score
 const calcModFromScore = (abilityScore) => {
-  abilityMod = Math.floor((abilityScore-10)/2);
+  let abilityMod = Math.floor((abilityScore-10)/2);
   return abilityMod;
 }
 
@@ -75,7 +75,7 @@ const roll4DropLowest = () => {
 
 // zip together ability score names and stats
 const zipStats = (statArray) => {
-  zippedArray = statArray.reduce((result, stat, index) => {
+  let zippedArray = statArray.reduce((result, stat, index) => {
     result[abilityScores[index]] = stat;
     return result;
   }, {})
@@ -87,10 +87,10 @@ const generateUnweightedStats = (raceChoice) => {
   console.log(''); 
   console.log(raceChoice); 
   console.log('');
-  baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
-  totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
-  totalModifiers = totalStats.map(i => calcModFromScore(i));
-  statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
+  let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalModifiers = totalStats.map(i => calcModFromScore(i));
+  let statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
   return statsObject;
 }
 
@@ -100,8 +100,8 @@ const generateWeightedStats = (raceChoice, classChoice) => {
   console.log(raceChoice); 
   console.log(classChoice); 
   console.log('');
-  baseStats = [0, 0, 0, 0, 0, 0];
-  sortedStats = [roll4DropLowest(), 
+  let baseStats = [0, 0, 0, 0, 0, 0];
+  let sortedStats = [roll4DropLowest(), 
                 roll4DropLowest(), 
                 roll4DropLowest(), 
                 roll4DropLowest(), 
@@ -216,9 +216,9 @@ const generateWeightedStats = (raceChoice, classChoice) => {
     default:
       break;
   }
-  totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
-  totalModifiers = totalStats.map(i => calcModFromScore(i));
-  statsObject = {'Base Stats': zipStats(baseStats), 
+  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalModifiers = totalStats.map(i => calcModFromScore(i));
+  let statsObject = {'Base Stats': zipStats(baseStats), 
                 'Total Stats': zipStats(totalStats), 
                 'Total Modifiers': zipStats(totalModifiers)};
   return statsObject;
@@ -226,7 +226,7 @@ const generateWeightedStats = (raceChoice, classChoice) => {
 
 // calculate hitpoints based on con mod, class, and char level
 const calcHitpoints = (conMod, classChoice, charLevel) => {
-  hitpoints = 0;
+  let hitpoints = 0;
   switch (classChoice){
     case 'Artificer':
     case 'Bard':
