@@ -28,7 +28,8 @@ hr.rounded {
     transition: background-color 0.1s 0s;
 }
 
-.option-container input[type=checkbox] + label:hover {
+.option-container input[type=checkbox] + label:hover,
+.option-container input[type=button] + label:hover {
     background-color: rgb(151, 151, 151);
 }
 
@@ -66,7 +67,7 @@ hr.rounded {
     margin-top: 20px;
 }
 
-.submit-container input {
+.submit-container button {
     font-size: xx-large;
 }
 

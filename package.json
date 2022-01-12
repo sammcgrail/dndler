@@ -2,7 +2,7 @@
   "name": "dndler",
   "version": "0.0.1",
   "description": "tool for creating improvized game materials for dungeons & dragons",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/vanadgir/dndler#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-validator": "^6.14.0",
+    "joi": "^17.5.0",
+    "parcel-bundler": "~1.12.5"
   }
 }
