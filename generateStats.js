@@ -290,7 +290,7 @@ const calcArmorClass = (modifiers, classChoice, equipmentList) => {
   return armorClass
 }
 
-export { generateWeightedStats, generateUnweightedStats, calcModFromScore, calcArmorClass, calcHitpoints };
+export { races, generateWeightedStats, generateUnweightedStats, calcModFromScore, calcArmorClass, calcHitpoints };
 // console.log('Unweighted: ')
 // console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
 // console.log('')
