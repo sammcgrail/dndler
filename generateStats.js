@@ -1,11 +1,5 @@
 // import lodash library
-var lodash = require('lodash');
-
-// function to calculate mod based on total score
-function calcModFromScore(abilityScore) {
-  abilityMod = Math.floor((abilityScore-10)/2);
-  return abilityMod;
-}
+import lodash from 'lodash';
 
 // array of ability score abbreviations
 const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
@@ -61,21 +55,27 @@ const raceBonuses = {
 }
 
 // get array of race names
-races = Object.keys(raceBonuses);
+const races = Object.keys(raceBonuses);
+
+// function to calculate mod based on total score
+const calcModFromScore = (abilityScore) => {
+  let abilityMod = Math.floor((abilityScore-10)/2);
+  return abilityMod;
+}
 
 // simulated dicerolls for base stats
-function roll4DropLowest() {
+const roll4DropLowest = () => {
   let dicerolls = [Math.floor(Math.random() * 6) + 1, 
-                   Math.floor(Math.random() * 6) + 1, 
-                   Math.floor(Math.random() * 6) + 1, 
-                   Math.floor(Math.random() * 6) + 1];
+                  Math.floor(Math.random() * 6) + 1, 
+                  Math.floor(Math.random() * 6) + 1, 
+                  Math.floor(Math.random() * 6) + 1];
   dicerolls.sort().reverse();
   return lodash.sum(dicerolls.slice(0,3));
 }
 
 // zip together ability score names and stats
-function zipStats(statArray) {
-  zippedArray = statArray.reduce(function (result, stat, index){
+const zipStats = (statArray) => {
+  let zippedArray = statArray.reduce((result, stat, index) => {
     result[abilityScores[index]] = stat;
     return result;
   }, {})
@@ -83,31 +83,31 @@ function zipStats(statArray) {
 }
 
 // generate stats, assigned randomly to ability scores
-function generateUnweightedStats(raceChoice) {
+const generateUnweightedStats = (raceChoice) => {
   console.log(''); 
   console.log(raceChoice); 
   console.log('');
-  baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
-  totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
-  totalModifiers = totalStats.map(i => calcModFromScore(i));
-  statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
+  let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalModifiers = totalStats.map(i => calcModFromScore(i));
+  let statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
   return statsObject;
 }
 
 // generate stats, assign with priority to certain scores, assign rest randomly
-function generateWeightedStats(raceChoice, classChoice) {
+const generateWeightedStats = (raceChoice, classChoice) => {
   console.log(''); 
   console.log(raceChoice); 
   console.log(classChoice); 
   console.log('');
-  baseStats = [0, 0, 0, 0, 0, 0];
-  sortedStats = [roll4DropLowest(), 
-                 roll4DropLowest(), 
-                 roll4DropLowest(), 
-                 roll4DropLowest(), 
-                 roll4DropLowest(), 
-                 roll4DropLowest()];
-  sortedStats.sort(function(a,b){return a-b}).reverse();
+  let baseStats = [0, 0, 0, 0, 0, 0];
+  let sortedStats = [roll4DropLowest(), 
+                roll4DropLowest(), 
+                roll4DropLowest(), 
+                roll4DropLowest(), 
+                roll4DropLowest(), 
+                roll4DropLowest()];
+  sortedStats.sort((a,b) => {a-b}).reverse();
   switch (classChoice) {
     case 'Artificer':
       baseStats[3] = sortedStats.shift();
@@ -216,17 +216,17 @@ function generateWeightedStats(raceChoice, classChoice) {
     default:
       break;
   }
-  totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
-  totalModifiers = totalStats.map(i => calcModFromScore(i));
-  statsObject = {'Base Stats': zipStats(baseStats), 
-                 'Total Stats': zipStats(totalStats), 
-                 'Total Modifiers': zipStats(totalModifiers)};
+  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalModifiers = totalStats.map(i => calcModFromScore(i));
+  let statsObject = {'Base Stats': zipStats(baseStats), 
+                'Total Stats': zipStats(totalStats), 
+                'Total Modifiers': zipStats(totalModifiers)};
   return statsObject;
 }
 
 // calculate hitpoints based on con mod, class, and char level
-function calcHitpoints(conMod, classChoice, charLevel) {
-  hitpoints = 0;
+const calcHitpoints = (conMod, classChoice, charLevel) => {
+  let hitpoints = 0;
   switch (classChoice){
     case 'Artificer':
     case 'Bard':
@@ -256,42 +256,43 @@ function calcHitpoints(conMod, classChoice, charLevel) {
 }
 
 // calculate armor class based on available gear and proficiencies
-function calcArmorClass(modifiers, classChoice, equipmentList) {
-    modSTR = modifiers['STR'];
-    modDEX = modifiers['DEX'];
-    modCON = modifiers['CON'];
-    modINT = modifiers['INT'];
-    modWIS = modifiers['WIS'];
-    modCHA = modifiers['CHA'];
-    armorClass = 10 + modDEX
-    // special cases of Barbarian and Monk
-    if (classChoice === 'Barbarian') {
-      armorClass = 10 + modDEX + modSTR 
-    } else if (classChoice === 'Monk') {
-      armorClass = 10 + modDEX + modWIS
-    }
-    // normal cases of armor in inventory
-    if (equipmentList.includes('Chain Mail')) {
+const calcArmorClass = (modifiers, classChoice, equipmentList) => {
+  modSTR = modifiers['STR'];
+  modDEX = modifiers['DEX'];
+  modCON = modifiers['CON'];
+  modINT = modifiers['INT'];
+  modWIS = modifiers['WIS'];
+  modCHA = modifiers['CHA'];
+  armorClass = 10 + modDEX
+  // special cases of Barbarian and Monk
+  if (classChoice === 'Barbarian') {
+    armorClass = 10 + modDEX + modSTR 
+  } else if (classChoice === 'Monk') {
+    armorClass = 10 + modDEX + modWIS
+  }
+  // normal cases of armor in inventory
+  if (equipmentList.includes('Chain Mail')) {
+    armorClass = 16
+  } else if (equipmentList.includes('Scale Mail')) {
+    if (modDEX >= 2) {
       armorClass = 16
-    } else if (equipmentList.includes('Scale Mail')) {
-      if (modDEX >= 2) {
-        armorClass = 16
-      } else {
-        armorClass = 14 + modDEX
-      }
-    } else if (equipmentList.includes('Studded Leather Armor')) {
-      armorClass = 12 + modDEX
-    } else if (equipmentList.includes('Leather Armor')) {
-      armorClass = 11 + modDEX
+    } else {
+      armorClass = 14 + modDEX
     }
-    if (equipmentList.includes('Shield')) {
-      armorClass = armorClass + 2
-    }
-    return armorClass
+  } else if (equipmentList.includes('Studded Leather Armor')) {
+    armorClass = 12 + modDEX
+  } else if (equipmentList.includes('Leather Armor')) {
+    armorClass = 11 + modDEX
+  }
+  if (equipmentList.includes('Shield')) {
+    armorClass = armorClass + 2
+  }
+  return armorClass
 }
 
-console.log('Unweighted: ')
-console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
-console.log('')
-console.log('Weighted: ')
-console.log(generateWeightedStats(races[Math.floor(Math.random()*races.length)], 'Fighter'));
+export { races, generateWeightedStats, generateUnweightedStats, calcModFromScore, calcArmorClass, calcHitpoints };
+// console.log('Unweighted: ')
+// console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
+// console.log('')
+// console.log('Weighted: ')
+// console.log(generateWeightedStats(races[Math.floor(Math.random()*races.length)], 'Fighter'));
