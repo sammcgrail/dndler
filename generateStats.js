@@ -1,5 +1,5 @@
 // import lodash library
-var lodash = require('lodash');
+const lodash = require('lodash');
 
 // function to calculate mod based on total score
 function calcModFromScore(abilityScore) {
