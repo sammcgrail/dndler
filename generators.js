@@ -290,7 +290,56 @@ const calcArmorClass = (modifiers, classChoice, equipmentList) => {
   return armorClass
 }
 
-export { races, generateWeightedStats, generateUnweightedStats, calcModFromScore, calcArmorClass, calcHitpoints };
+//generates a full character sheet
+const generateAll = (weighted = false, charLevel = 1, charBackground = 'any', charClass = 'any') => {
+  let race = races[Math.floor(Math.random()*races.length)]
+
+  characterJSON = {
+    race: race,
+    name: generateName(),
+    class: '',
+    level: charLevel,
+    hitpoints: 0,
+    armorclass: 0,
+    background: {},
+    stats: {},
+    features: [],
+    proficiency: {},
+    equipment: [],
+    spells: {},
+    weapons: {},
+    sources: {}
+  };
+  // other initializations
+  class_source = ''
+  race_source = ''
+  background_source = ''
+  base_stats = {}
+  race_bonuses = {}
+  total_stats = {}
+  total_modifiers = {}
+};
+
+//generates name, need to change it to use the full character name list from data
+const generateName = () => {
+  const firstNames = ['Greg', 'Robert', 'Baernaldus', 'Joe'];
+  const lastNames = ['Roberts', 'the Brown', 'Smith', 'the Noob'];
+  let firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  let lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
+  return firstName + ' ' + lastName
+}
+
+
+export { 
+  races,
+  generateAll,
+  generateName,
+  generateWeightedStats,
+  generateUnweightedStats,
+  calcModFromScore,
+  calcArmorClass,
+  calcHitpoints
+};
 // console.log('Unweighted: ')
 // console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
 // console.log('')
