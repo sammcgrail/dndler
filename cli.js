@@ -1,9 +1,9 @@
-import generateName from './generateName.js';
 import {
     races,
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
+    generateName,
     calcModFromScore,
     calcArmorClass,
     calcHitpoints

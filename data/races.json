@@ -1,0 +1,66 @@
+{
+    "Eberron: Rising from the Lost War": {
+        "Changeling": {},
+        "Kalashtar": {},
+        "Orc of Eberron": {},
+        "Shifter": {},
+        "Warforged": {}
+    },
+    "Elemental Evil's Player Companion": {
+        "Aarakocra": {},
+        "Genasi": {},
+        "Goliath": {}
+    },
+    "Explorer's Guide to Wildemount": {
+        "Orc of Exandra": {}
+    },
+    "Guild Master's Guide to Ravnica": {
+        "Centaur": {},
+        "Loxodon": {},
+        "Minotaur": {},
+        "Simic Hybrid": {},
+        "Vedalken": {}
+    },
+    "Mythic Odysseys of Theros": {
+        "Leonin": {},
+        "Satyr": {}
+    },
+    "Player's Handbook": {
+        "Dragonborn": {},
+        "Drow Elf": {},
+        "Forest Gnome": {},
+        "Half-Elf": {},
+        "Half-Orc": {},
+        "High Elf": {},
+        "Hill Dwarf": {},
+        "Human": {},
+        "Lightfoot Halfling": {},
+        "Mountain Dwarf": {},
+        "Rock Gnome": {},
+        "Stout Halfling": {},
+        "Tiefling": {},
+        "Variant Human": {},
+        "Wood Elf": {}
+    },
+    "Sword Coast Adventurer's Guide": {
+        "Feral Tiefling": {}
+    },
+    "The Wild Beyond the Witchlight": {
+        "Fairy": {},
+        "Harengon": {}
+    },
+    "Volo's Guide to Monsters": {
+        "Aasimar": {},
+        "Bugbear": {},
+        "Firbolg": {},
+        "Goblin": {},
+        "Hobgoblin": {},
+        "Kenku": {},
+        "Kobold": {},
+        "Lizardfolk": {},
+        "Orc": {},
+        "Tabaxi": {},
+        "Triton": {},
+        "Yuan-Ti Pureblood": {}
+    }
+}
