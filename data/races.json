@@ -1,128 +1,110 @@
 {
-    "Eberron: Rising from the Lost War": {
-        "Changeling": {
-            "bonuses": [0, 0, 0, 0, 0, 2],
-            "additionalStatChoices": [1],
-            "speed": "30",
-            "languages": {
-                "HasCommon": true,
-                "RacialLanguages": [],
-                "OtherLanguageCount": 2
-              },
-            "traits": ["Shapechanger", "Changeling Instincts"]
-        },
-        "Kalashtar": {
-            "bonuses": [],
-            "speed": "30",
-            "languages": [""],
-            "traits": [
-                {
-                    "name": "",
-                    "description": ""
-                }
-            ] 
-        },
-        "Orc of Eberron": {
-            "bonuses": [],
-            "speed": "30",
-            "languages": [""],
-            "traits": [
-                {
-                    "name": "",
-                    "description": ""
-                }
-            ] 
-        },
-        "Shifter": {
-            "bonuses": [],
-            "speed": 30,
-            "languages": {
-                "HasCommon": true,
-                "RacialLanguages": [],
-                "OtherLanguageCount": 1
-              },
-            "traits": [
-                {
-                    "name": "",
-                    "description": ""
-                }
-            ] 
-        },
-        "Warforged": { "bonuses": [],
-            "speed": "30",
-            "languages": [""],
-            "traits": [
-                {
-                    "name": "",
-                    "description": ""
-                }
-            ] }
+    "Changeling": {
+        "bonuses": [0, 0, 0, 0, 0, 2],
+        "additionalStatChoices": [1],
+        "speed": "30",
+        "languages": {
+            "HasCommon": true,
+            "RacialLanguages": [],
+            "OtherLanguageCount": 2
+            },
+        "traits": ["Shapechanger", "Changeling Instincts"]
     },
-    "Elemental Evil's Player Companion": {
-        "Aarakocra": {
-            "bonuses": [],
-            "speed": "30",
-            "languages": [""],
-            "traits": [
-                {
-                    "name": "",
-                    "description": ""
-                }
-            ] 
-        },
-        "Genasi": {},
-        "Goliath": {}
+    "Kalashtar": {
+        "bonuses": [],
+        "speed": "30",
+        "languages": [""],
+        "traits": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ] 
     },
-    "Explorer's Guide to Wildemount": {
-        "Orc of Exandra": {}
+    "Orc of Eberron": {
+        "bonuses": [],
+        "speed": "30",
+        "languages": [""],
+        "traits": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ] 
     },
-    "Guild Master's Guide to Ravnica": {
-        "Centaur": {},
-        "Loxodon": {},
-        "Minotaur": {},
-        "Simic Hybrid": {},
-        "Vedalken": {}
+    "Shifter": {
+        "bonuses": [],
+        "speed": 30,
+        "languages": {
+            "HasCommon": true,
+            "RacialLanguages": [],
+            "OtherLanguageCount": 1
+            },
+        "traits": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ] 
     },
-    "Mythic Odysseys of Theros": {
-        "Leonin": {},
-        "Satyr": {}
+    "Warforged": { "bonuses": [],
+        "speed": "30",
+        "languages": [""],
+        "traits": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ] },
+    "Aarakocra": {
+        "bonuses": [],
+        "speed": "30",
+        "languages": [""],
+        "traits": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ] 
     },
-    "Player's Handbook": {
-        "Dragonborn": {},
-        "Drow Elf": {},
-        "Forest Gnome": {},
-        "Half-Elf": {},
-        "Half-Orc": {},
-        "High Elf": {},
-        "Hill Dwarf": {},
-        "Human": {},
-        "Lightfoot Halfling": {},
-        "Mountain Dwarf": {},
-        "Rock Gnome": {},
-        "Stout Halfling": {},
-        "Tiefling": {},
-        "Variant Human": {},
-        "Wood Elf": {}
-    },
-    "Sword Coast Adventurer's Guide": {
-        "Feral Tiefling": {}
-    },
-    "The Wild Beyond the Witchlight": {
-        "Fairy": {},
-        "Harengon": {}
-    },
-    "Volo's Guide to Monsters": {
-        "Aasimar": {},
-        "Bugbear": {},
-        "Firbolg": {},
-        "Goblin": {},
-        "Hobgoblin": {},
-        "Kenku": {},
-        "Kobold": {},
-        "Lizardfolk": {},
-        "Orc": {},
-        "Tabaxi": {},
-        "Triton": {},
-        "Yuan-Ti Pureblood": {}
-    }
+    "Genasi": {},
+    "Goliath": {},
+    "Orc of Exandra": {},
+    "Centaur": {},
+    "Loxodon": {},
+    "Minotaur": {},
+    "Simic Hybrid": {},
+    "Vedalken": {},
+    "Leonin": {},
+    "Satyr": {},
+    "Dragonborn": {},
+    "Drow Elf": {},
+    "Forest Gnome": {},
+    "Half-Elf": {},
+    "Half-Orc": {},
+    "High Elf": {},
+    "Hill Dwarf": {},
+    "Human": {},
+    "Lightfoot Halfling": {},
+    "Mountain Dwarf": {},
+    "Rock Gnome": {},
+    "Stout Halfling": {},
+    "Tiefling": {},
+    "Variant Human": {},
+    "Wood Elf": {},
+    "Feral Tiefling": {},
+    "Fairy": {},
+    "Harengon": {},
+    "Aasimar": {},
+    "Bugbear": {},
+    "Firbolg": {},
+    "Goblin": {},
+    "Hobgoblin": {},
+    "Kenku": {},
+    "Kobold": {},
+    "Lizardfolk": {},
+    "Orc": {},
+    "Tabaxi": {},
+    "Triton": {},
+    "Yuan-Ti Pureblood": {}
 }
