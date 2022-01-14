@@ -1,13 +1,75 @@
 {
     "Eberron: Rising from the Lost War": {
-        "Changeling": {},
-        "Kalashtar": {},
-        "Orc of Eberron": {},
-        "Shifter": {},
-        "Warforged": {}
+        "Changeling": {
+            "bonuses": [0, 0, 0, 0, 0, 2],
+            "additionalStatChoices": [1],
+            "speed": "30",
+            "languages": {
+                "HasCommon": true,
+                "RacialLanguages": [],
+                "OtherLanguageCount": 2
+              },
+            "traits": ["Shapechanger", "Changeling Instincts"]
+        },
+        "Kalashtar": {
+            "bonuses": [],
+            "speed": "30",
+            "languages": [""],
+            "traits": [
+                {
+                    "name": "",
+                    "description": ""
+                }
+            ] 
+        },
+        "Orc of Eberron": {
+            "bonuses": [],
+            "speed": "30",
+            "languages": [""],
+            "traits": [
+                {
+                    "name": "",
+                    "description": ""
+                }
+            ] 
+        },
+        "Shifter": {
+            "bonuses": [],
+            "speed": 30,
+            "languages": {
+                "HasCommon": true,
+                "RacialLanguages": [],
+                "OtherLanguageCount": 1
+              },
+            "traits": [
+                {
+                    "name": "",
+                    "description": ""
+                }
+            ] 
+        },
+        "Warforged": { "bonuses": [],
+            "speed": "30",
+            "languages": [""],
+            "traits": [
+                {
+                    "name": "",
+                    "description": ""
+                }
+            ] }
     },
     "Elemental Evil's Player Companion": {
-        "Aarakocra": {},
+        "Aarakocra": {
+            "bonuses": [],
+            "speed": "30",
+            "languages": [""],
+            "traits": [
+                {
+                    "name": "",
+                    "description": ""
+                }
+            ] 
+        },
         "Genasi": {},
         "Goliath": {}
     },
