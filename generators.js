@@ -112,7 +112,7 @@ const generateWeightedStats = (raceChoice, classChoice) => {
     case 'Artificer':
       baseStats[3] = sortedStats.shift();
       baseStats[1] = sortedStats.shift();
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
+      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];   //consider using lodash shuffle
       baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
       baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
       baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
