@@ -13,59 +13,36 @@
     "Kalashtar": {
         "bonuses": [],
         "speed": "30",
-        "languages": [""],
-        "traits": [
-            {
-                "name": "",
-                "description": ""
-            }
-        ] 
+        "languages": {},
+        "traits": [] 
     },
     "Orc of Eberron": {
-        "bonuses": [],
+        "bonuses": [2, 0, 1, 0, 0, 0],
         "speed": "30",
-        "languages": [""],
-        "traits": [
-            {
-                "name": "",
-                "description": ""
-            }
-        ] 
+        "languages": {},
+        "traits": [] 
     },
     "Shifter": {
-        "bonuses": [],
+        "bonuses": [0, 0, 0, 0, 0, 0],
         "speed": 30,
         "languages": {
             "HasCommon": true,
             "RacialLanguages": [],
             "OtherLanguageCount": 1
             },
-        "traits": [
-            {
-                "name": "",
-                "description": ""
-            }
-        ] 
+        "traits": [] 
     },
-    "Warforged": { "bonuses": [],
-        "speed": "30",
-        "languages": [""],
-        "traits": [
-            {
-                "name": "",
-                "description": ""
-            }
-        ] },
-    "Aarakocra": {
+    "Warforged": { 
         "bonuses": [],
         "speed": "30",
-        "languages": [""],
-        "traits": [
-            {
-                "name": "",
-                "description": ""
-            }
-        ] 
+        "languages": {},
+        "traits": [] 
+    },
+    "Aarakocra": {
+        "bonuses": [0, 2, 0, 0, 1, 0],
+        "speed": "30",
+        "languages": {},
+        "traits": [] 
     },
     "Genasi": {},
     "Goliath": {},
