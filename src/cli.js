@@ -1,6 +1,6 @@
-import generateName from './generateName.js';
 import {
     races,
+    generateName,
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
