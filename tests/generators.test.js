@@ -8,7 +8,9 @@ import {
     calcArmorClass,
     calcHitpoints
 } from '../src/generators.js'
-
-test('generates a name as a string', () => {
-  expect(typeof generateName() === 'string').toEqual(true);
+ 
+test('function \'generateName\' generates a name as a string', () => {
+    expect(generateName()).toBeDefined()
+    expect(typeof generateName() === 'string').toEqual(true);
+    expect(generateName().length).toBeGreaterThan(1)
 });
