@@ -382,27 +382,139 @@
         }
     },
     "Armor": {
-        "Light": [
-            "Padded",
-            "Leather",
-            "Studded Leather"
-        ],
-        "Medium": [
-            "Hide",
-            "Chain Shirt",
-            "Scale Mail",
-            "Spiked Armor",
-            "Breastplate",
-            "Halfplate"
-        ],
-        "Heavy": [
-            "Ring Mail",
-            "Chain Mail",
-            "Splint",
-            "Plate"
-        ],
-        "Shield": [
-            "Shield"
-        ]
+        "Light": {
+            "Padded": {
+                "ArmorClass": 11,
+                "addDEX": true,
+                "DEXmax2": false,
+                "StrengthReq": 0,
+                "StealthDisadvantage": true,
+                "Weight": 8,
+                "Cost": "5 Gp"
+            },
+            "Leather": {
+                "ArmorClass": 11,
+                "addDEX": true,
+                "DEXmax2": false,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 10,
+                "Cost": "10 Gp"
+            },
+            "Studded Leather": {
+                "ArmorClass": 12,
+                "addDEX": true,
+                "DEXmax2": false,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 13,
+                "Cost": "45 Gp"
+            }
+        },
+        "Medium": {
+            "Hide": {
+                "ArmorClass": 12,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 12,
+                "Cost": "10 Gp"
+            },
+            "Chain Shirt": {
+                "ArmorClass": 13,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 20,
+                "Cost": "50 Gp"
+            },
+            "Scale Mail": {
+                "ArmorClass": 14,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": "",
+                "StealthDisadvantage": true,
+                "Weight": 45,
+                "Cost": "50 Gp"
+            },
+            "Spiked Armor": {
+                "ArmorClass": 14,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": 0,
+                "StealthDisadvantage": true,
+                "Weight": 45,
+                "Cost": "75 Gp"
+            },
+            "Breastplate": {
+                "ArmorClass": 14,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 20,
+                "Cost": "400 Gp"
+            },
+            "Halfplate": {
+                "ArmorClass": 15,
+                "addDEX": true,
+                "DEXmax2": true,
+                "StrengthReq": 0,
+                "StealthDisadvantage": true,
+                "Weight": 40,
+                "Cost": "750 Gp"
+            }
+        },
+        "Heavy": {
+            "Ring Mail": {
+                "ArmorClass": 14,
+                "addDEX": false,
+                "DEXmax2": false,
+                "StrengthReq": 0,
+                "StealthDisadvantage": true,
+                "Weight": 40,
+                "Cost": "30 Gp"
+            },
+            "Chain Mail": {
+                "ArmorClass": 16,
+                "addDEX": false,
+                "DEXmax2": false,
+                "StrengthReq": 13,
+                "StealthDisadvantage": true,
+                "Weight": 55,
+                "Cost": "75 Gp"
+            },
+            "Splint": {
+                "ArmorClass": 17,
+                "addDEX": false,
+                "DEXmax2": false,
+                "StrengthReq": 15,
+                "StealthDisadvantage": true,
+                "Weight": 60,
+                "Cost": "200 Gp"
+            },
+            "Plate": {
+                "ArmorClass": 18,
+                "addDEX": false,
+                "DEXmax2": false,
+                "StrengthReq": 15,
+                "StealthDisadvantage": true,
+                "Weight": 65,
+                "Cost": "1500 Gp"
+            }
+        },
+        "Shield": {
+            "Shield": {
+                "ArmorClass": 2,
+                "addDEX": false,
+                "DEXmax2": false,
+                "StrengthReq": 0,
+                "StealthDisadvantage": false,
+                "Weight": 6,
+                "Cost": "10 Gp"
+            }
+        }
     }
 }
