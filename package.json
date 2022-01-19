@@ -7,7 +7,8 @@
   "scripts": {
     "build": "babel generateAll.js -d dist",
     "start": "npm run build && node dist/generateAll.js",
-    "test": "generateCharacter"
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
+    "jest": "^27.4.7",
     "lodash": "^4.17.21"
   }
 }

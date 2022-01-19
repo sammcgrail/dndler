@@ -1,5 +1,6 @@
 import {
     races,
+    generateName,
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
