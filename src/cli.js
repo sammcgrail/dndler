@@ -4,6 +4,7 @@ import {
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
+    generateName,
     calcModFromScore,
     calcArmorClass,
     calcHitpoints
