@@ -1,10 +1,27 @@
 // import lodash library
 import lodash from 'lodash';
+import {
+  sourcebooks,
+  names,
+  backgrounds,
+  races,
+  classFeatures
+} from './data.js';
+
+// import json data files
+/*
+const sourcebooks = require('../data/sourcebooks.json');
+const names = require('../data/names.json');
+const backgrounds = require('../data/backgrounds.json');
+const races = require('../data/races.json');
+const classFeatures = require('../data/classFeatures.json');
+*/
 
 // array of ability score abbreviations
-const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
+const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
 // (k, v) pairs of (race, bonuses)
+/*
 const raceBonuses = {
   'Dragonborn': [0, 2, 0, 0, 0, 1],
   'Hill Dwarf': [0, 0, 2, 0, 1, 0],
@@ -56,22 +73,25 @@ const raceBonuses = {
 
 // get array of race names
 const races = Object.keys(raceBonuses);
+*/
 
 // function to calculate mod based on total score
 const calcModFromScore = (abilityScore) => {
   let abilityMod = Math.floor((abilityScore-10)/2);
   return abilityMod;
-}
+};
 
 // simulated dicerolls for base stats
 const roll4DropLowest = () => {
-  let dicerolls = [Math.floor(Math.random() * 6) + 1, 
-                  Math.floor(Math.random() * 6) + 1, 
-                  Math.floor(Math.random() * 6) + 1, 
-                  Math.floor(Math.random() * 6) + 1];
+  let dicerolls = [
+    Math.floor(Math.random() * 6) + 1,
+    Math.floor(Math.random() * 6) + 1,
+    Math.floor(Math.random() * 6) + 1,
+    Math.floor(Math.random() * 6) + 1
+  ];
   dicerolls.sort().reverse();
   return lodash.sum(dicerolls.slice(0,3));
-}
+};
 
 // zip together ability score names and stats
 const zipStats = (statArray) => {
@@ -80,149 +100,94 @@ const zipStats = (statArray) => {
     return result;
   }, {})
   return zippedArray;
-}
+};
 
 // generate stats, assigned randomly to ability scores
 const generateUnweightedStats = (raceChoice) => {
-  console.log(''); 
-  console.log(raceChoice); 
-  console.log('');
-  let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
   let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
   let statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
   return statsObject;
-}
+};
+
+// stat generator helper function
+const prioritizeStats = (sortedStats, priorityStats) => {
+  let baseStats = [0, 0, 0, 0, 0, 0];
+  let remainingStats = [0, 1, 2, 3, 4, 5];
+  priorityStats.forEach(stat => baseStats[stat] = sortedStats.shift());
+  remainingStats = remainingStats.filter(x => !priorityStats.includes(x));
+  sortedStats = lodash.shuffle(sortedStats);
+  remainingStats.forEach(stat => baseStats[stat] = sortedStats.shift());
+  return baseStats;
+};
 
 // generate stats, assign with priority to certain scores, assign rest randomly
 const generateWeightedStats = (raceChoice, classChoice) => {
-  console.log(''); 
-  console.log(raceChoice); 
-  console.log(classChoice); 
-  console.log('');
-  let baseStats = [0, 0, 0, 0, 0, 0];
-  let sortedStats = [roll4DropLowest(), 
-                roll4DropLowest(), 
-                roll4DropLowest(), 
-                roll4DropLowest(), 
-                roll4DropLowest(), 
-                roll4DropLowest()];
-  sortedStats.sort((a,b) => {a-b}).reverse();
+  let baseStats = []
+  let sortedStats = [
+    roll4DropLowest(),
+    roll4DropLowest(),
+    roll4DropLowest(),
+    roll4DropLowest(),
+    roll4DropLowest(),
+    roll4DropLowest()
+  ];
+  sortedStats.sort(function(a,b){
+    return a-b;
+  }).reverse();
   switch (classChoice) {
     case 'Artificer':
-      baseStats[3] = sortedStats.shift();
-      baseStats[1] = sortedStats.shift();
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];   //consider using lodash shuffle
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [3, 1]);
       break;
     case 'Barbarian':
-      baseStats[0] = sortedStats.shift();
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [0, 2, 1]);
       break; 
     case 'Bard':
-      baseStats[5] = sortedStats.shift(); 
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [5, 1]);
       break; 
     case 'Cleric':
-      baseStats[4] = sortedStats.shift(); 
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[1] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
+      baseStats = prioritizeStats(sortedStats, [4, 2]);
       break;
     case 'Druid':
-      baseStats[4] = sortedStats.shift(); 
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[1] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [4, 2]);
       break; 
     case 'Fighter':
-      baseStats[0] = sortedStats.shift(); 
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [0, 1, 2]);
       break;
     case 'Monk':
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[4] = sortedStats.shift(); 
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [1, 4, 2]);
       break; 
     case 'Paladin':
-      baseStats[5] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.shift(); 
-      baseStats[3] = sortedStats.shift(); 
-      baseStats[1] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [5, 0, 3]);
       break; 
     case 'Ranger':
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[4] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [1, 4]);
       break; 
     case 'Rogue':
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [1]);
       break; 
     case 'Sorcerer':
-      baseStats[5] = sortedStats.shift(); 
-      baseStats[2] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[1] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
+      baseStats = prioritizeStats(sortedStats, [5, 2]);
       break;
     case 'Warlock':
-      baseStats[5] = sortedStats.shift(); 
-      baseStats[1] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[3] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [5, 1]);
       break; 
     case 'Wizard':
-      baseStats[3] = sortedStats.shift(); 
-      baseStats[0] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[1] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[2] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[4] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0]; 
-      baseStats[5] = sortedStats.splice(Math.floor(Math.random() * sortedStats.length), 1)[0];
+      baseStats = prioritizeStats(sortedStats, [3]);
       break; 
     default:
       break;
   }
-  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
-  let statsObject = {'Base Stats': zipStats(baseStats), 
-                'Total Stats': zipStats(totalStats), 
-                'Total Modifiers': zipStats(totalModifiers)};
+  let statsObject = {
+    'Base Stats': zipStats(baseStats), 
+    'Total Stats': zipStats(totalStats), 
+    'Total Modifiers': zipStats(totalModifiers)
+  };
   return statsObject;
-}
+};
 
 // calculate hitpoints based on con mod, class, and char level
 const calcHitpoints = (conMod, classChoice, charLevel) => {
@@ -253,7 +218,7 @@ const calcHitpoints = (conMod, classChoice, charLevel) => {
       break;
   }
   return hitpoints;
-}
+};
 
 // calculate armor class based on available gear and proficiencies
 const calcArmorClass = (modifiers, classChoice, equipmentList) => {
@@ -288,7 +253,37 @@ const calcArmorClass = (modifiers, classChoice, equipmentList) => {
     armorClass = armorClass + 2
   }
   return armorClass
-}
+};
+
+//generates name
+const generateName = () => {
+  let firstname = lodash.sample(names['First']);
+  let lastname = lodash.sample(names['Last']);
+  return firstname + ' ' + lastname;
+};
+
+// generates race
+const generateRace = () => {
+  let race = lodash.sample(Object.keys(races));
+  return race;
+};
+
+// generates class
+const generateClass = () => {
+  let classchoice = lodash.sample(Object.keys(classFeatures));
+  return classchoice;
+};
+
+// generates background
+const generateBackground = () => {
+  let background = lodash.sample(Object.keys(backgrounds));
+  let bgObject = {
+    "Name": background
+  };
+  Object.keys(backgrounds[background]).forEach(k => bgObject[k] = lodash.sample(backgrounds[background][k]));
+  bgObject['Gear'] = backgrounds[background]['Gear'];
+  return bgObject;
+};
 
 //generates a full character sheet
 const generateAll = (weighted = false, charLevel = 1, charBackground = 'any', charClass = 'any') => {
@@ -320,28 +315,15 @@ const generateAll = (weighted = false, charLevel = 1, charBackground = 'any', ch
   total_modifiers = {}
 };
 
-//generates name, need to change it to use the full character name list from data
-const generateName = () => {
-  const firstNames = ['Greg', 'Robert', 'Baernaldus', 'Joe'];
-  const lastNames = ['Roberts', 'the Brown', 'Smith', 'the Noob'];
-  let firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-  let lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
-  return firstName + ' ' + lastName
-}
-
-
-export { 
-  races,
+export {
   generateAll,
   generateName,
+  generateRace,
+  generateBackground,
+  generateClass,
   generateWeightedStats,
   generateUnweightedStats,
   calcModFromScore,
   calcArmorClass,
   calcHitpoints
 };
-// console.log('Unweighted: ')
-// console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
-// console.log('')
-// console.log('Weighted: ')
-// console.log(generateWeightedStats(races[Math.floor(Math.random()*races.length)], 'Fighter'));

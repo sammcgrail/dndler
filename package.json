@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "THIS IS THE DINDLER ",
   "type": "module",
-  "main": "generateAll.js",
+  "main": "./src/cli.js",
   "scripts": {
     "build": "babel generateAll.js -d dist",
     "start": "npm run build && node dist/generateAll.js",
