@@ -21,7 +21,10 @@ console.log("");
 console.log("Name: " + name);
 console.log("Race: " + race);
 console.log("Class: " + classchoice);
-console.log("Background: " + background["Name"])
+console.log("");
+console.log("Background: ");
+Object.keys(background).forEach(k => console.log(k + ": " + background[k]));
+console.log("");
 console.log("Stats:");
 Object.keys(stats["Total Stats"]).forEach(k => console.log(k + ": " + stats["Total Stats"][k]));
 console.log("");
