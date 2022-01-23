@@ -20,15 +20,50 @@ import {
 } from '../src/generators.js'
  
 test('function \'generateName\' generates a name as a string', () => {
-    expect(generateName()).toBeDefined()
-    expect(typeof generateName() === 'string').toEqual(true);
-    expect(generateName().length).toBeGreaterThan(1)
+    let name = generateName()
+    expect(name).toBeDefined()
+    expect(typeof name === 'string').toEqual(true);
+    expect(name.length).toBeGreaterThan(1)
 });
 
 test('function \'generateRace\' generates a race as a string', () => {
-    expect(generateRace()).toBeDefined()
-    expect(typeof generateRace() === 'string').toEqual(true);
-    expect(generateRace().length).toBeGreaterThan(1)
+    let race = generateRace()
+    expect(race).toBeDefined()
+    expect(typeof race === 'string').toEqual(true);
+    expect(race.length).toBeGreaterThan(1)
+});
+
+test('function \'generateBackground\' generates a background object', () => {
+    let background = generateBackground()
+    console.log(background)
+    expect(background).toBeDefined()
+    expect(typeof background === 'object').toEqual(true);
+
+    expect(background.Name).toBeDefined()
+    expect(background.Name.length).toBeGreaterThan(1)
+    expect(typeof background.Name === 'string').toEqual(true);
+
+    expect(background.Trait).toBeDefined()
+    expect(background.Trait.length).toBeGreaterThan(1)
+    expect(typeof background.Trait === 'string').toEqual(true);
+
+    expect(background.Ideal).toBeDefined()
+    expect(background.Ideal.length).toBeGreaterThan(1)
+    expect(typeof background.Ideal === 'string').toEqual(true);
+
+    expect(background.Bond).toBeDefined()
+    expect(background.Bond.length).toBeGreaterThan(1)
+    expect(typeof background.Bond === 'string').toEqual(true);
+
+    expect(background.Flaw).toBeDefined()
+    expect(background.Flaw.length).toBeGreaterThan(1)
+    expect(typeof background.Flaw === 'string').toEqual(true);
+
+    expect(background.Gear).toBeDefined()
+    expect(background.Gear.length).toBeGreaterThan(1)
+    expect(typeof background.Gear === 'object').toEqual(true);
+    expect(background.Gear[0].length).toBeGreaterThan(1)
+    expect(typeof background.Gear[0] === 'string').toEqual(true);
 });
 
 test('function \'calcHitPoints\' generates correct hp', () => {

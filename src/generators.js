@@ -214,7 +214,7 @@ const generateClass = () => {
 const generateBackground = () => {
   let background = lodash.sample(Object.keys(backgrounds));
   let bgObject = {
-    "Name": background
+    Name: background
   };
   Object.keys(backgrounds[background]).forEach(k => bgObject[k] = lodash.sample(backgrounds[background][k]));
   bgObject['Gear'] = backgrounds[background]['Gear'];
