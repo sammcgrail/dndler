@@ -1,14 +1,31 @@
 import {
-    races,
     generateName,
+    generateRace,
+    generateClass,
+    generateBackground,
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
-    generateName,
     calcModFromScore,
     calcArmorClass,
     calcHitpoints
-} from './generators.js'
+} from './generators.js';
 
-console.log(generateName())
-console.log(generateUnweightedStats(races[Math.floor(Math.random()*races.length)]));
+let name = generateName();
+let race = generateRace();
+let classchoice = generateClass();
+let background = generateBackground();
+let stats = generateWeightedStats(race, classchoice);
+
+console.log("");
+console.log("Name: " + name);
+console.log("Race: " + race);
+console.log("Class: " + classchoice);
+console.log("");
+console.log("Background: ");
+Object.keys(background).forEach(k => console.log(k + ": " + background[k]));
+console.log("");
+console.log("Stats:");
+Object.keys(stats["Total Stats"]).forEach(k => console.log(k + ": " + stats["Total Stats"][k]));
+console.log("");
+
