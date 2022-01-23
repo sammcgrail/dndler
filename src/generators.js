@@ -13,7 +13,7 @@ const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
 // function to calculate mod based on total score
 const calcModFromScore = (abilityScore) => {
-  let abilityMod = Math.floor((abilityScore-10)/2);
+  let abilityMod = Math.floor((abilityScore - 10) / 2);
   return abilityMod;
 };
 
@@ -26,7 +26,7 @@ const roll4DropLowest = () => {
     Math.floor(Math.random() * 6) + 1
   ];
   dicerolls.sort().reverse();
-  return lodash.sum(dicerolls.slice(0,3));
+  return lodash.sum(dicerolls.slice(0, 3));
 };
 
 // zip together ability score names and stats
@@ -41,9 +41,9 @@ const zipStats = (statArray) => {
 // generate stats, assigned randomly to ability scores
 const generateUnweightedStats = (raceChoice) => {
   baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
-  let totalStats = lodash.zipWith(baseStats, raceBonuses[raceChoice], lodash.add);
+  let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
-  let statsObject = {'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers)};
+  let statsObject = { 'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers) };
   return statsObject;
 };
 
@@ -69,8 +69,8 @@ const generateWeightedStats = (raceChoice, classChoice) => {
     roll4DropLowest(),
     roll4DropLowest()
   ];
-  sortedStats.sort(function(a,b){
-    return a-b;
+  sortedStats.sort(function (a, b) {
+    return a - b;
   }).reverse();
   switch (classChoice) {
     case 'Artificer':
@@ -78,48 +78,48 @@ const generateWeightedStats = (raceChoice, classChoice) => {
       break;
     case 'Barbarian':
       baseStats = prioritizeStats(sortedStats, [0, 2, 1]);
-      break; 
+      break;
     case 'Bard':
       baseStats = prioritizeStats(sortedStats, [5, 1]);
-      break; 
+      break;
     case 'Cleric':
       baseStats = prioritizeStats(sortedStats, [4, 2]);
       break;
     case 'Druid':
       baseStats = prioritizeStats(sortedStats, [4, 2]);
-      break; 
+      break;
     case 'Fighter':
       baseStats = prioritizeStats(sortedStats, [0, 1, 2]);
       break;
     case 'Monk':
       baseStats = prioritizeStats(sortedStats, [1, 4, 2]);
-      break; 
+      break;
     case 'Paladin':
       baseStats = prioritizeStats(sortedStats, [5, 0, 3]);
-      break; 
+      break;
     case 'Ranger':
       baseStats = prioritizeStats(sortedStats, [1, 4]);
-      break; 
+      break;
     case 'Rogue':
       baseStats = prioritizeStats(sortedStats, [1]);
-      break; 
+      break;
     case 'Sorcerer':
       baseStats = prioritizeStats(sortedStats, [5, 2]);
       break;
     case 'Warlock':
       baseStats = prioritizeStats(sortedStats, [5, 1]);
-      break; 
+      break;
     case 'Wizard':
       baseStats = prioritizeStats(sortedStats, [3]);
-      break; 
+      break;
     default:
       break;
   }
   let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
   let statsObject = {
-    'Base Stats': zipStats(baseStats), 
-    'Total Stats': zipStats(totalStats), 
+    'Base Stats': zipStats(baseStats),
+    'Total Stats': zipStats(totalStats),
     'Total Modifiers': zipStats(totalModifiers)
   };
   return statsObject;
@@ -128,7 +128,7 @@ const generateWeightedStats = (raceChoice, classChoice) => {
 // calculate hitpoints based on con mod, class, and char level
 const calcHitpoints = (conMod, classChoice, charLevel) => {
   let hitpoints = 0;
-  switch (classChoice){
+  switch (classChoice) {
     case 'Artificer':
     case 'Bard':
     case 'Cleric':
@@ -167,7 +167,7 @@ const calcArmorClass = (modifiers, classChoice, equipmentList) => {
   armorClass = 10 + modDEX
   // special cases of Barbarian and Monk
   if (classChoice === 'Barbarian') {
-    armorClass = 10 + modDEX + modSTR 
+    armorClass = 10 + modDEX + modSTR
   } else if (classChoice === 'Monk') {
     armorClass = 10 + modDEX + modWIS
   }
@@ -222,18 +222,22 @@ const generateBackground = () => {
 };
 
 //generates a full character sheet
-const generateAll = (weighted = false, charLevel = 1, charBackground = 'any', charClass = 'any') => {
-  let race = races[Math.floor(Math.random()*races.length)]
+const generateAll = () => {
+  let race = generateRace();
+  let name = generateName();
+  let classchoice = generateClass();
+  let background = generateBackground();
+  let stats = generateUnweightedStats(race);
 
-  characterJSON = {
+  const characterJSON = {
     race: race,
     name: generateName(),
-    class: '',
-    level: charLevel,
-    hitpoints: 0,
+    class: classchoice,
+    level: 1,
+    hitpoints: calcHitpoints(stats['Total Modifiers']['CON'], classchoice, 1),
     armorclass: 0,
-    background: {},
-    stats: {},
+    background: background,
+    stats: stats,
     features: [],
     proficiency: {},
     equipment: [],
@@ -241,14 +245,7 @@ const generateAll = (weighted = false, charLevel = 1, charBackground = 'any', ch
     weapons: {},
     sources: {}
   };
-  // other initializations
-  class_source = ''
-  race_source = ''
-  background_source = ''
-  base_stats = {}
-  race_bonuses = {}
-  total_stats = {}
-  total_modifiers = {}
+  return characterJSON;
 };
 
 export {
