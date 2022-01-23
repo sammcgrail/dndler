@@ -1,4 +1,11 @@
-import { iteratee } from 'lodash';
+import lodash from 'lodash';
+import {
+  sourcebooks,
+  names,
+  backgrounds,
+  races,
+  classFeatures
+} from '../src/data.js';
 import {
     generateAll,
     generateName,
@@ -18,16 +25,23 @@ test('function \'generateName\' generates a name as a string', () => {
     expect(generateName().length).toBeGreaterThan(1)
 });
 
+test('function \'generateRace\' generates a race as a string', () => {
+    expect(generateRace()).toBeDefined()
+    expect(typeof generateRace() === 'string').toEqual(true);
+    expect(generateRace().length).toBeGreaterThan(1)
+});
+
 test('function \'calcHitPoints\' generates correct hp', () => {
     expect(calcHitpoints()).toBeDefined()
     expect(typeof calcHitpoints() === 'number').toEqual(true);
     expect(calcHitpoints(2, 'Druid', 1)).toEqual(10)
 })
 
-test('function \'generateUnweightedStats\' weighs stats accordingly', () => {
+// test('function \'generateUnweightedStats\' generates appropriate stats', () => {
+//     expect(generateUnweightedStats()).toBeDefined()
+//     expect(typeof generateUnweightedStats() === 'object').toEqual(true);
+// })
 
-})
+// test('function \'generateWeightedStats\' weighs stats accordingly', () => {
 
-test('function \'generateWeightedStats\' weighs stats accordingly', () => {
-
-})
+// })

@@ -40,7 +40,7 @@ const zipStats = (statArray) => {
 
 // generate stats, assigned randomly to ability scores
 const generateUnweightedStats = (raceChoice) => {
-  baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
   let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
   let statsObject = { 'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers) };
