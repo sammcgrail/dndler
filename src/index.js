@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const { body, validationResult } = require('express-validator');
-
+const generator = require('./js/generators.js');
+const interpreter = require('./js/interpreter.js');
+const prettify = require('./js/prettify.js');
 
 const port = process.env.PORT || 3000;
 
@@ -18,13 +20,11 @@ app.get('/custom', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    res.status(200).send('A randomized character will show up here.');
-    let dataToSend;
+    res.status(200).send(prettify(generator()));
 });
 
-app.post('/custom.html', (req, res) => {
-    res.status(200).send('A character reflecting the chosen filters will show up here.');
-    let dataToSend;
+app.post('/custom', (req, res) => {
+    res.status(200).send(interpreter(req.body));
 });
 
 app.get('/characters/:name', (req, res) => {

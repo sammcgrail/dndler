@@ -1,12 +1,10 @@
 // import lodash library
-import lodash from 'lodash';
-import {
-  sourcebooks,
-  names,
-  backgrounds,
-  races,
-  classFeatures
-} from './data.js';
+const lodash = require('lodash');
+const sourcebooks = require('../../data/sourcebooks.js');
+const names = require('../../data/names.js');
+const backgrounds = require('../../data/backgrounds.js');
+const races = require('../../data/races.js');
+const classFeatures = require('../../data/classFeatures.js');
 
 // array of ability score abbreviations
 const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -248,7 +246,7 @@ const generateAll = () => {
   return characterJSON;
 };
 
-export {
+/*export {
   generateAll,
   generateName,
   generateRace,
@@ -259,4 +257,6 @@ export {
   calcModFromScore,
   calcArmorClass,
   calcHitpoints
-};
+};*/
+
+module.exports = generateAll;
