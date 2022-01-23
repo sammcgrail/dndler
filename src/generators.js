@@ -43,7 +43,7 @@ const generateUnweightedStats = (raceChoice) => {
   let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
   let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
-  let statsObject = { 'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers) };
+  let statsObject = { baseStats: zipStats(baseStats), totalStats: zipStats(totalStats), totalModifiers: zipStats(totalModifiers) };
   return statsObject;
 };
 
