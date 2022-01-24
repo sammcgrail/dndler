@@ -1,10 +1,12 @@
 // import lodash library
 import { sum, zipWith, add, shuffle, sample } from 'lodash';
-import sourcebooks from '../data/sourcebooks.js';
-import names from '../data/names.js';
-import backgrounds from '../data/backgrounds.js';
-import races from '../data/races.js';
-import classFeatures from '../data/classFeatures.js';
+import {
+  sourcebooks,
+  names,
+  backgrounds,
+  races,
+  classFeatures
+} from '../data/data.js';
 
 // array of ability score abbreviations
 const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -246,7 +248,7 @@ const generateAll = () => {
   return characterJSON;
 };
 
-module.exports = {
+export {
   generateAll,
   generateName,
   generateRace,
@@ -258,5 +260,3 @@ module.exports = {
   calcArmorClass,
   calcHitpoints
 };
-
-// module.exports = generateAll;

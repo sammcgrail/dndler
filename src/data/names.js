@@ -3199,4 +3199,4 @@ const names = {
     ]
 };
 
-module.exports = names;
+export default names;

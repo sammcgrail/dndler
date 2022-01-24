@@ -1606,4 +1606,4 @@ const classFeatures = {
     }
 };
 
-module.exports = classFeatures;
+export default classFeatures;

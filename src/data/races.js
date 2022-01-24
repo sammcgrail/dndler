@@ -286,4 +286,4 @@ const races = {
     }
 };
 
-module.exports = races;
+export default races;
