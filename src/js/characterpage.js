@@ -1,7 +1,8 @@
-const prettify = (characterData) =>
+/*currently using very ugly html insertion*/
+const debugDisplay = (characterData) =>
 {
     var numbers = /^[0-9]+$/;
-    let retVal = "<form class='generate' id='generateForm' action='/' method='POST'><div class='submit-container'><button type='submit' class='' id='submitBtn' name='submit'>GIMME ANUDDER MIN!</button></div></form><h1>" + characterData['name'] + "</h1><p>";
+    let retVal = "<form class='goBack' id='goBackForm' action='/' method='GET'><button type='submit' class='' id='submitBtn' name=''>HOME</button></form><form class='generate' id='generateForm' action='/' method='POST'><div class='submit-container'><button type='submit' class='' id='submitBtn' name='submit'>GIMME ANUDDER MIN!</button></div></form><h1>" + characterData['name'] + "</h1><p>";
     for(prop in characterData)
     {
         if(prop === 'name')
@@ -44,4 +45,4 @@ const prettify = (characterData) =>
     return retVal;
 }
 
-module.exports = prettify;
+module.exports = debugDisplay;

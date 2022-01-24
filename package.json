@@ -5,7 +5,9 @@
   "main": "./src/index.js",
   "scripts": {
     "build": "babel generateAll.js -d dist",
-    "start": "node src/index.js",
+    "start": "node ./src/index.js",
+    "devstart": "nodemon ./src/index.js",
+    "clistart": "nodemon ./src/js/cli.js",
     "test": "jest",
     "watch": "jest --watch"
   },
@@ -37,6 +39,7 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
     "jest": "^27.4.7",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "nodemon": "~2.0.15"
   }
 }
