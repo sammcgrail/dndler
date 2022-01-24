@@ -3,8 +3,10 @@ const express = require('express');
 const app = express();
 const { body, validationResult } = require('express-validator');
 const generator = require('./js/generators.js');
+
+//dev requires
 const interpreter = require('./js/interpreter.js');
-const prettify = require('./js/prettify.js');
+const prettify = require('./js/characterpage.js');
 
 const port = process.env.PORT || 3000;
 
@@ -33,4 +35,4 @@ app.get('/characters/:name', (req, res) => {
     else res.send(character);
 });
 
-app.listen(port, () => console.log(`DINDLER listening on port ${port}!`));
+app.listen(port, () => console.log(`DNDLER listening on port ${port}!`));
