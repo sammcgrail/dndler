@@ -38,10 +38,10 @@ const zipStats = (statArray) => {
 
 // generate stats, assigned randomly to ability scores
 const generateUnweightedStats = (raceChoice) => {
-  baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
   let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
-  let statsObject = { 'Base Stats': zipStats(baseStats), 'Total Stats': zipStats(totalStats), 'Total Modifiers': zipStats(totalModifiers) };
+  let statsObject = { baseStats: zipStats(baseStats), totalStats: zipStats(totalStats), totalModifiers: zipStats(totalModifiers) };
   return statsObject;
 };
 
@@ -212,7 +212,7 @@ const generateClass = () => {
 const generateBackground = () => {
   let background = lodash.sample(Object.keys(backgrounds));
   let bgObject = {
-    "Name": background
+    Name: background
   };
   Object.keys(backgrounds[background]).forEach(k => bgObject[k] = lodash.sample(backgrounds[background][k]));
   bgObject['Gear'] = backgrounds[background]['Gear'];
@@ -229,10 +229,10 @@ const generateAll = () => {
 
   const characterJSON = {
     race: race,
-    name: generateName(),
+    name: name,
     class: classchoice,
     level: 1,
-    hitpoints: calcHitpoints(stats['Total Modifiers']['CON'], classchoice, 1),
+    hitpoints: calcHitpoints(stats.totalModifiers['CON'], classchoice, 1),
     armorclass: 0,
     background: background,
     stats: stats,
@@ -246,7 +246,7 @@ const generateAll = () => {
   return characterJSON;
 };
 
-/*export {
+module.exports = {
   generateAll,
   generateName,
   generateRace,
@@ -257,6 +257,6 @@ const generateAll = () => {
   calcModFromScore,
   calcArmorClass,
   calcHitpoints
-};*/
+};
 
-module.exports = generateAll;
+// module.exports = generateAll;

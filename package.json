@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "build": "babel generateAll.js -d dist",
-    "start": "npm run build && node dist/generateAll.js",
+    "start": "node src/index.js",
     "test": "jest",
     "watch": "jest --watch"
   },

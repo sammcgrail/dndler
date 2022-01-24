@@ -20,7 +20,7 @@ app.get('/custom', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    res.status(200).send(prettify(generator()));
+    res.status(200).send(prettify(generator.generateAll()));
 });
 
 app.post('/custom', (req, res) => {

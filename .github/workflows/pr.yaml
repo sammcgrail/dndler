@@ -1,0 +1,14 @@
+name: Test New Changes
+on: 
+  pull_request:
+    types: [opened, reopened, synchronize]
+jobs:
+  test-new-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install dependencies 
+        run: npm install
+      - name: Run test suite
+        run: npm run test
