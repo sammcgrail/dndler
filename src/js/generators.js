@@ -229,10 +229,10 @@ const generateAll = () => {
 
   const characterJSON = {
     race: race,
-    name: generateName(),
+    name: name,
     class: classchoice,
     level: 1,
-    hitpoints: calcHitpoints(stats['Total Modifiers']['CON'], classchoice, 1),
+    hitpoints: calcHitpoints(stats.totalModifiers['CON'], classchoice, 1),
     armorclass: 0,
     background: background,
     stats: stats,
@@ -246,7 +246,7 @@ const generateAll = () => {
   return characterJSON;
 };
 
-/*export {
+module.exports = {
   generateAll,
   generateName,
   generateRace,
@@ -257,6 +257,6 @@ const generateAll = () => {
   calcModFromScore,
   calcArmorClass,
   calcHitpoints
-};*/
+};
 
-module.exports = generateAll;
+// module.exports = generateAll;
