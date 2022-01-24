@@ -6422,6 +6422,4 @@ const spells = {
     }
 };
 
-export {
-    spells
-};
+module.exports = spells;

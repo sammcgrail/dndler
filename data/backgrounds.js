@@ -3400,6 +3400,4 @@ const backgrounds = {
     }
 };
 
-export {
-    backgrounds
-};
+module.exports = backgrounds;

@@ -519,6 +519,4 @@ const equipment = {
     }
 };
 
-export {
-    equipment
-};
+module.exports = equipment;
