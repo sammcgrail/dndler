@@ -1,2 +1,0 @@
-//"watch": "parcel ./public/index.html --no-hmr --open",
-    //"build": "rm .dist/* && parcel build .public/index.html --no-minify --public-url ./dist"
