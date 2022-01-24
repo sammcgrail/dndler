@@ -1,6 +1,14 @@
 # dndler
 The dndler is a tool for creating improvized game materials for Dungeons & Dragons campaigns.
 
+# Node Install 
+    npm install
+
+# Usage
+    node start
+    localhost:3000
+    have fun
+
 # Currently Being Updated
 As of January 10, 2022, the dndler is in the process of being rebuilt. Previous python codebase can be found in the dndler_py folder.
 

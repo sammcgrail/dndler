@@ -286,6 +286,4 @@ const races = {
     }
 };
 
-export {
-    races
-};
+module.exports = races;

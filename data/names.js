@@ -3199,6 +3199,4 @@ const names = {
     ]
 };
 
-export {
-    names
-};
+module.exports = names;
