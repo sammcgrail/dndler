@@ -88,7 +88,3 @@ test('function \'generateUnweightedStats()\' generates appropriate stats', () =>
         })
     })
 })
-
-// test('function \'generateWeightedStats()\' weighs stats accordingly', () => {
-
-// })
