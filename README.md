@@ -2,10 +2,13 @@
 The dndler is a tool for creating improvized game materials for Dungeons & Dragons campaigns.
 
 # Usage
-    npm install
+    yarn
 then
 
-    npm run start
+    yarn start
+or to run with `nodemon`
+
+    yarn dev
     
 localhost:3000
 
