@@ -10,7 +10,7 @@ import prettify from '../client/js/characterpage.js';
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(require('body-parser').urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
