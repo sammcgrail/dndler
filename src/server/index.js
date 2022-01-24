@@ -1,13 +1,13 @@
-const path = require('path');
-const express = require('express');
-const app = express();
-const { body, validationResult } = require('express-validator');
-const generator = require('./generators.js');
+import path from 'path';
+import express from 'express';
+import { body, validationResult } from 'express-validator';
+import * as generator from './generators.js';
 
 //dev requires
-const interpreter = require('../client/js/interpreter.js');
-const prettify = require('../client/js/characterpage.js');
+import interpreter from '../client/js/interpreter.js';
+import prettify from '../client/js/characterpage.js';
 
+const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname));

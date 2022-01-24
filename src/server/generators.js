@@ -1,10 +1,10 @@
 // import lodash library
-const lodash = require('lodash');
-const sourcebooks = require('../data/sourcebooks.js');
-const names = require('../data/names.js');
-const backgrounds = require('../data/backgrounds.js');
-const races = require('../data/races.js');
-const classFeatures = require('../data/classFeatures.js');
+import { sum, zipWith, add, shuffle, sample } from 'lodash';
+import sourcebooks from '../data/sourcebooks.js';
+import names from '../data/names.js';
+import backgrounds from '../data/backgrounds.js';
+import races from '../data/races.js';
+import classFeatures from '../data/classFeatures.js';
 
 // array of ability score abbreviations
 const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -24,7 +24,7 @@ const roll4DropLowest = () => {
     Math.floor(Math.random() * 6) + 1
   ];
   dicerolls.sort().reverse();
-  return lodash.sum(dicerolls.slice(0, 3));
+  return sum(dicerolls.slice(0, 3));
 };
 
 // zip together ability score names and stats
@@ -39,7 +39,7 @@ const zipStats = (statArray) => {
 // generate stats, assigned randomly to ability scores
 const generateUnweightedStats = (raceChoice) => {
   let baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
-  let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
+  let totalStats = zipWith(baseStats, races[raceChoice]['bonuses'], add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
   let statsObject = { baseStats: zipStats(baseStats), totalStats: zipStats(totalStats), totalModifiers: zipStats(totalModifiers) };
   return statsObject;
@@ -51,7 +51,7 @@ const prioritizeStats = (sortedStats, priorityStats) => {
   let remainingStats = [0, 1, 2, 3, 4, 5];
   priorityStats.forEach(stat => baseStats[stat] = sortedStats.shift());
   remainingStats = remainingStats.filter(x => !priorityStats.includes(x));
-  sortedStats = lodash.shuffle(sortedStats);
+  sortedStats = shuffle(sortedStats);
   remainingStats.forEach(stat => baseStats[stat] = sortedStats.shift());
   return baseStats;
 };
@@ -113,7 +113,7 @@ const generateWeightedStats = (raceChoice, classChoice) => {
     default:
       break;
   }
-  let totalStats = lodash.zipWith(baseStats, races[raceChoice]['bonuses'], lodash.add);
+  let totalStats = zipWith(baseStats, races[raceChoice]['bonuses'], add);
   let totalModifiers = totalStats.map(i => calcModFromScore(i));
   let statsObject = {
     'Base Stats': zipStats(baseStats),
@@ -191,30 +191,30 @@ const calcArmorClass = (modifiers, classChoice, equipmentList) => {
 
 //generates name
 const generateName = () => {
-  let firstname = lodash.sample(names['First']);
-  let lastname = lodash.sample(names['Last']);
+  let firstname = sample(names['First']);
+  let lastname = sample(names['Last']);
   return firstname + ' ' + lastname;
 };
 
 // generates race
 const generateRace = () => {
-  let race = lodash.sample(Object.keys(races));
+  let race = sample(Object.keys(races));
   return race;
 };
 
 // generates class
 const generateClass = () => {
-  let classchoice = lodash.sample(Object.keys(classFeatures));
+  let classchoice = sample(Object.keys(classFeatures));
   return classchoice;
 };
 
 // generates background
 const generateBackground = () => {
-  let background = lodash.sample(Object.keys(backgrounds));
+  let background = sample(Object.keys(backgrounds));
   let bgObject = {
     Name: background
   };
-  Object.keys(backgrounds[background]).forEach(k => bgObject[k] = lodash.sample(backgrounds[background][k]));
+  Object.keys(backgrounds[background]).forEach(k => bgObject[k] = sample(backgrounds[background][k]));
   bgObject['Gear'] = backgrounds[background]['Gear'];
   return bgObject;
 };
