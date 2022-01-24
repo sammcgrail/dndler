@@ -2,12 +2,12 @@
   "name": "dndler",
   "version": "0.0.1",
   "description": "tool for creating improvized game materials for dungeons & dragons",
-  "main": "./src/index.js",
+  "main": "./src/server/index.js",
   "scripts": {
     "build": "babel generateAll.js -d dist",
-    "start": "node ./src/index.js",
-    "devstart": "nodemon ./src/index.js",
-    "clistart": "nodemon ./src/js/cli.js",
+    "start": "node -r esm ./src/server/index.js",
+    "devstart": "nodemon -r esm ./src/server/index.js",
+    "clistart": "nodemon -r esm ./src/server/cli.js",
     "test": "jest",
     "watch": "jest --watch"
   },
@@ -30,16 +30,18 @@
   },
   "homepage": "https://github.com/vanadgir/dndler#readme",
   "dependencies": {
+    "babel-plugin-lodash": "^3.3.4",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-validator": "^6.14.0",
-    "joi": "^17.5.0"
+    "joi": "^17.5.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.4.6",
     "jest": "^27.4.7",
-    "lodash": "^4.17.21",
     "nodemon": "~2.0.15"
   }
 }

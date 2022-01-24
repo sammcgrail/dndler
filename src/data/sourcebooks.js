@@ -281,4 +281,4 @@ const sourcebooks = {
     }
 };
 
-module.exports = sourcebooks;
+export default sourcebooks;
