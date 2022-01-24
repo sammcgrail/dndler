@@ -9,7 +9,7 @@ import {
     calcModFromScore,
     calcArmorClass,
     calcHitpoints
-} from '../src/js/generators.js'
+} from '../../server/generators.js'
  
 test('function \'generateName()\' generates a name as a string', () => {
     let name = generateName()

@@ -5,9 +5,9 @@
   "main": "./src/index.js",
   "scripts": {
     "build": "babel generateAll.js -d dist",
-    "start": "node ./src/index.js",
-    "devstart": "nodemon ./src/index.js",
-    "clistart": "nodemon ./src/js/cli.js",
+    "start": "node ./src/server/index.js",
+    "devstart": "nodemon ./src/server/index.js",
+    "clistart": "nodemon ./src/server/cli.js",
     "test": "jest",
     "watch": "jest --watch"
   },

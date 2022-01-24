@@ -1,10 +1,10 @@
 // import lodash library
 const lodash = require('lodash');
-const sourcebooks = require('../../data/sourcebooks.js');
-const names = require('../../data/names.js');
-const backgrounds = require('../../data/backgrounds.js');
-const races = require('../../data/races.js');
-const classFeatures = require('../../data/classFeatures.js');
+const sourcebooks = require('../data/sourcebooks.js');
+const names = require('../data/names.js');
+const backgrounds = require('../data/backgrounds.js');
+const races = require('../data/races.js');
+const classFeatures = require('../data/classFeatures.js');
 
 // array of ability score abbreviations
 const abilityScores = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];

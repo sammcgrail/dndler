@@ -1,4 +1,4 @@
-const generator = require('./generators.js');
+const generator = require('../../server/generators.js');
 const sourcebooks = require('../../data/sourcebooks.js');
 
 const formParse = (formData) =>
