@@ -1,0 +1,9 @@
+{
+  "name": "dndlerclient",
+  "packageManager": "yarn@3.1.1",
+  "type": "module",
+  "dependencies": {
+    "dndlerdata": "workspace:~",
+    "dndlerserver": "workspace:~"
+  }
+}

@@ -2686,13 +2686,35 @@ __metadata:
     "@babel/preset-env": ^7.16.11
     babel-jest: ^27.4.6
     babel-plugin-lodash: ^3.3.4
+    jest: ^27.4.7
+    lodash: ^4.17.21
+    nodemon: ^2.0.15
+  languageName: unknown
+  linkType: soft
+
+"dndlerclient@workspace:src/client":
+  version: 0.0.0-use.local
+  resolution: "dndlerclient@workspace:src/client"
+  dependencies:
+    dndlerdata: "workspace:~"
+    dndlerserver: "workspace:~"
+  languageName: unknown
+  linkType: soft
+
+"dndlerdata@workspace:src/data, dndlerdata@workspace:~":
+  version: 0.0.0-use.local
+  resolution: "dndlerdata@workspace:src/data"
+  languageName: unknown
+  linkType: soft
+
+"dndlerserver@workspace:src/server, dndlerserver@workspace:~":
+  version: 0.0.0-use.local
+  resolution: "dndlerserver@workspace:src/server"
+  dependencies:
     body-parser: ^1.19.1
     express: ^4.17.2
     express-validator: ^6.14.0
-    jest: ^27.4.7
     joi: ^17.5.0
-    lodash: ^4.17.21
-    nodemon: ^2.0.15
   languageName: unknown
   linkType: soft
 
