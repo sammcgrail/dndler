@@ -1,5 +1,6 @@
 // import lodash library
-import { sum, zipWith, add, shuffle, sample } from 'lodash';
+import pkg from 'lodash';
+const { sum, zipWith, add, shuffle, sample } = pkg;
 import {
   sourcebooks,
   names,

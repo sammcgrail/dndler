@@ -9,7 +9,7 @@ import {
     calcModFromScore,
     calcArmorClass,
     calcHitpoints
-} from '../generators.js';
+} from './generators.js';
 
 let name = generateName();
 let race = generateRace();

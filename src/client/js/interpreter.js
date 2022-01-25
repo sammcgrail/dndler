@@ -1,5 +1,4 @@
-const generator = require('../../server/generators.js');
-const sourcebooks = require('../../data/sourcebooks.js');
+import sourcebooks from '../../data/sourcebooks.js';
 
 const formParse = (formData) =>
 {
@@ -15,4 +14,6 @@ const formParse = (formData) =>
     return retVal;
 }
 
-module.exports = formParse;
+export {
+    formParse
+};
