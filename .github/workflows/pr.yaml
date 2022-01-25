@@ -12,3 +12,5 @@ jobs:
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Run test suite
         run: yarn test
+      - name: Run cli
+        run: yarn cli
