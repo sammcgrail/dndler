@@ -126,6 +126,76 @@ const generateWeightedStats = (raceChoice, classChoice) => {
   return statsObject;
 };
 
+const generateStats = (raceChoice, classChoice, isWeighted = false) => {
+  let baseStats = [];
+  if (isWeighted === true) {
+    let sortedStats = [
+      roll4DropLowest(),
+      roll4DropLowest(),
+      roll4DropLowest(),
+      roll4DropLowest(),
+      roll4DropLowest(),
+      roll4DropLowest()
+    ];
+    sortedStats.sort(function (a, b) {
+      return a - b;
+    }).reverse();
+    switch (classChoice) {
+      case 'Artificer':
+        baseStats = prioritizeStats(sortedStats, [3, 1]);
+        break;
+      case 'Barbarian':
+        baseStats = prioritizeStats(sortedStats, [0, 2, 1]);
+        break;
+      case 'Bard':
+        baseStats = prioritizeStats(sortedStats, [5, 1]);
+        break;
+      case 'Cleric':
+        baseStats = prioritizeStats(sortedStats, [4, 2]);
+        break;
+      case 'Druid':
+        baseStats = prioritizeStats(sortedStats, [4, 2]);
+        break;
+      case 'Fighter':
+        baseStats = prioritizeStats(sortedStats, [0, 1, 2]);
+        break;
+      case 'Monk':
+        baseStats = prioritizeStats(sortedStats, [1, 4, 2]);
+        break;
+      case 'Paladin':
+        baseStats = prioritizeStats(sortedStats, [5, 0, 3]);
+        break;
+      case 'Ranger':
+        baseStats = prioritizeStats(sortedStats, [1, 4]);
+        break;
+      case 'Rogue':
+        baseStats = prioritizeStats(sortedStats, [1]);
+        break;
+      case 'Sorcerer':
+        baseStats = prioritizeStats(sortedStats, [5, 2]);
+        break;
+      case 'Warlock':
+        baseStats = prioritizeStats(sortedStats, [5, 1]);
+        break;
+      case 'Wizard':
+        baseStats = prioritizeStats(sortedStats, [3]);
+        break;
+      default:
+        break;
+    };
+  } else {
+    baseStats = [roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest(), roll4DropLowest()];
+  };
+  let totalStats = zipWith(baseStats, races[raceChoice]['bonuses'], add);
+  let totalModifiers = totalStats.map(i => calcModFromScore(i));
+  let statsObject = {
+    'Base Stats': zipStats(baseStats),
+    'Total Stats': zipStats(totalStats),
+    'Total Modifiers': zipStats(totalModifiers)
+  };
+  return statsObject;
+};
+
 // calculate hitpoints based on con mod, class, and char level
 const calcHitpoints = (conMod, classChoice, charLevel) => {
   let hitpoints = 0;
@@ -257,6 +327,7 @@ export {
   generateClass,
   generateWeightedStats,
   generateUnweightedStats,
+  generateStats,
   calcModFromScore,
   calcArmorClass,
   calcHitpoints

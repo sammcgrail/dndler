@@ -6,6 +6,7 @@ import {
     generateAll,
     generateWeightedStats,
     generateUnweightedStats,
+    generateStats,
     calcModFromScore,
     calcArmorClass,
     calcHitpoints
@@ -15,7 +16,7 @@ let name = generateName();
 let race = generateRace();
 let classchoice = generateClass();
 let background = generateBackground();
-let stats = generateWeightedStats(race, classchoice);
+let stats = generateStats(race, classchoice, true);
 
 console.log("");
 console.log("Name: " + name);
