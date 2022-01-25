@@ -1,44 +1,46 @@
 {
-  "name": "dndler",
-  "version": "0.0.1",
-  "description": "tool for creating improvized game materials for dungeons & dragons",
-  "main": "./src/server/index.js",
-  "type": "module",
-  "scripts": {
-    "start": "node ./src/server/index.js",
-    "dev": "nodemon ./src/server/index.js",
-    "cli": "node ./src/server/cli.js",
-    "clidev": "nodemon ./src/server/cli.js",
-    "test": "jest",
-    "watch": "jest --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vanadgir/dndler.git"
-  },
-  "keywords": [
-    "dnd",
-    "ttrpg",
-    "dindl",
-    "mins",
-    "generator",
-    "games"
-  ],
-  "author": "Varun Nadgir, Tyler Brandt, Graham Gilpatric",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vanadgir/dndler/issues"
-  },
-  "homepage": "https://github.com/vanadgir/dndler#readme",
-  "dependencies": {
-    "babel-plugin-lodash": "^3.3.4"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.16.11",
-    "babel-jest": "^27.4.6",
-    "jest": "^27.4.7",
-    "nodemon": "^2.0.15"
-  },
-  "packageManager": "yarn@3.1.1"
+    "name": "dndler",
+    "version": "0.0.1",
+    "description": "tool for creating improvized game materials for dungeons & dragons",
+    "main": "./core/server/index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node ./core/server/index.js",
+        "dev": "nodemon ./core/server/index.js",
+        "cli": "node ./core/server/cli.js",
+        "clidev": "nodemon ./coreserver/cli.js",
+        "test": "jest",
+        "watch": "jest --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vanadgir/dndler.git"
+    },
+    "workspaces": [
+        "core/server",
+        "core/data",
+        "core/client"
+    ],
+    "keywords": [
+        "dnd",
+        "ttrpg",
+        "dindl",
+        "mins",
+        "generator",
+        "games"
+    ],
+    "author": "Varun Nadgir, Tyler Brandt, Graham Gilpatric",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vanadgir/dndler/issues"
+    },
+    "homepage": "https://github.com/vanadgir/dndler#readme",
+    "devDependencies": {
+        "@babel/core": "^7.16.12",
+        "@babel/preset-env": "^7.16.11",
+        "babel-jest": "^27.4.6",
+        "jest": "^27.4.7",
+        "nodemon": "^2.0.15"
+    },
+    "packageManager": "yarn@3.1.1"
 }
