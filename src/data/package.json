@@ -5,8 +5,9 @@
   "repository": "https://github.com/vanadgir/dndler/",
   "author": "Varun Nadgir, Tyler Brandt, Graham Gilpatric",
   "license": "MIT",
+  "type": "module",
   "dependencies":
   {
-    
+
   }
 }
