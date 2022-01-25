@@ -1,0 +1,12 @@
+{
+  "name": "data",
+  "version": "0.0.1",
+  "description": "data system for the dndler",
+  "repository": "https://github.com/vanadgir/dndler/",
+  "author": "Varun Nadgir, Tyler Brandt, Graham Gilpatric",
+  "license": "MIT",
+  "dependencies":
+  {
+    
+  }
+}
